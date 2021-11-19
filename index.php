@@ -14,5 +14,3 @@ $req::listItems($conn);
 echo('<br>');
 $req::getItem($conn, 2);
 
-
-
