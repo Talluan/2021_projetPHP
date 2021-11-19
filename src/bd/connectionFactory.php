@@ -1,5 +1,10 @@
 <?php
 
+namespace wish\bd;
+
+use \PDO;
+use \PDOException;
+
 class connectionFactory {
 
     private static $param;

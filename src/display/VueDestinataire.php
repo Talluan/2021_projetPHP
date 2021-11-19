@@ -1,4 +1,4 @@
 <?php
 
-namespace wishlist\display;
+namespace wish\display;
 

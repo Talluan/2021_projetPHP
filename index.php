@@ -1,7 +1,9 @@
 <?php
 
-require_once('/bd/connectionFactory.php');
-require_once('requetes.php');
+require_once('vendor/autoload.php');
+require_once('Requetes.php');
+
+use \wish\bd\connectionFactory;
 
 $db = new connectionFactory();
 $conn = $db->makeConnection();

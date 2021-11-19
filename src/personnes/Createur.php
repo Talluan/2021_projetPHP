@@ -1,3 +1,3 @@
 <?php
 
-namespace wishlist\personnes;
+namespace wish\personnes;
