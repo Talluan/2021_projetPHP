@@ -11,4 +11,8 @@ $conn = $db->makeConnection();
 $req = new requetes();
 
 $req::listItems($conn);
+echo('<br>');
+$req::getItem($conn, 2);
+
+
 

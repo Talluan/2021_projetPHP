@@ -4,6 +4,10 @@ class requetes
 {
     
 
+    /**
+     * Affiche l'ensemble des articles
+     * @param $connection permettant d'accéder à la BDD 
+     */
     public static function listItems($connection) {
 
         $stmt = $connection->prepare("select * from item");
@@ -17,9 +21,19 @@ class requetes
         }
     }
 
-    public static function getItem($connection) {
+    /**
+     * Affiche 
+     */
+    public static function getItem($connection, $id) {
 
-        
+        $stmt = $connection->prepare("select * from item where id = :id");
+        $stmt->execute(array(':id' => $id));
+        $res = $stmt->fetch();
+
+        foreach ($res as $key => $value) {
+            echo($key . " : " . $value . "<br>");
+        }
+        echo("<br>");
     }
 
 
