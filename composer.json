@@ -5,5 +5,8 @@
       "psr-4": {
         "wish\\": "src/"
       }
+    },
+    "require": {
+        "slim/slim": "3.*"
     }
-  }
+}
