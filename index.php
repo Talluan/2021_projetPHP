@@ -1,20 +1,25 @@
 <?php
 
 require_once('vendor/autoload.php');
-require_once('Requetes.php');
-
-use \wish\bd\connectionFactory;
-
 use \Psr\Http\Message\ServerRequestInterface as Request;
+use Illuminate\Database\Capsule\Manager as DB;
 
-
-
+$db = new DB();
+$tab = parse_ini_file('conf/db.config.ini');
+$db->addConnection([
+    'driver'    => $tab['driver'],
+    'host'      => $tab['host'],
+    'database'  => $tab['database'],
+    'username'  => $tab['username'],
+    'password'  => $tab['password'],
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+$db->setAsglobal();
+$db->bootEloquent();
 $app = new \Slim\App;
 
-$db = new connectionFactory();
-$conn = $db->makeConnection();
-
-$req = new requetes();
 
 $app->get(
     '/listes',
@@ -30,9 +35,8 @@ $app->get(
 );
 $app->get(
     '/item/{id}',
-    function ($rq, $rs, $args) use ($conn) {
-        $req=new requetes();
-        $rs->getBody()->write("item numero: " . $args['id'].'<br>'.$req::getItem($conn, $args['id']));
+    function ($rq, $rs, $args) {
+        $rs->getBody()->write("item numero: " . $args['id'].'<br>');
     }
 );
 $app->run();
