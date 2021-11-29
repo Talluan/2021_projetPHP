@@ -1,3 +1,3 @@
 <?php
 
-namespace wish\display;
+namespace wish\vues;

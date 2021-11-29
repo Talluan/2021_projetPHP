@@ -1,3 +1,3 @@
 <?php
 
-namespace wish\personnes;
+namespace wish\controleur;
