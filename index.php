@@ -29,7 +29,7 @@ $app->get(
 $app->get(
     '/accueil',
     function ($rq, $rs, $args) {
-        $rs->getBody()->write("item numero: " .'<br>');
+        $rs->getBody()->write("Bienvenue");
     }
 );
 $app->run();
