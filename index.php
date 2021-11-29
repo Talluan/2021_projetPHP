@@ -27,9 +27,9 @@ $app->get(
     }
 );
 $app->get(
-    'index.php',
+    '/accueil',
     function ($rq, $rs, $args) {
-        $rs->getBody()->write("item numero: " . $args['id'].'<br>');
+        $rs->getBody()->write("item numero: " .'<br>');
     }
 );
 $app->run();
