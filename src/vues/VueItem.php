@@ -1,7 +1,6 @@
 <?php
 
 namespace wish\vues;
-use \Exception;
 
 class VueItem{
 
@@ -28,12 +27,13 @@ class VueItem{
         return $html;
     }
 
+
     public function htmlUnItem(){
         $res ="";
         foreach ($this->modele->items as $value) {
-            $res+="$value->nom."<br>""
+            $res+="$value->nom.<br>";
         }
-        return res;
+        return $res;
     }
 
 }
