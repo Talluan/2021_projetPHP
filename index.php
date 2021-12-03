@@ -27,7 +27,8 @@ $app->get(
     function ($rq, $rs, $args) {
         $rs->getBody()->write("liste numero: " . $args['id'].'<br>');
         $l = Liste::find($args['id']);
-        var_dump($l);
+
+        echo($l->items);
     }
 );
 $app->get(

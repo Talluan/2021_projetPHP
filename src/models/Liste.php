@@ -9,4 +9,8 @@ class Liste extends \Illuminate\Database\Eloquent\Model
     protected $primaryKey = "no";
     public $timestamps = false;
 
+    public function items() {
+        return $this->hasMany('wish\models\Item', 'liste_id');
+    }
+
 }
