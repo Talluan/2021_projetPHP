@@ -17,6 +17,9 @@ class VueItem{
         <!DOCTYPE html> <html>
         <body>
          <div class="content">
+             <h1>
+              Affiche d'un Item ! 
+             </h1>
             $content
          </div>
         </body><html>
