@@ -28,8 +28,17 @@ $app->get(
     function ($rq, $rs, $args) {
         $rs->getBody()->write("liste numero: " . $args['id'].'<br>');
         $l = Liste::find($args['id']);
+    }
+);
+$app->get(
+    '/liste/{id}/items',
+    function ($rq, $rs, $args) {
+        $rs->getBody()->write("liste numero: " . $args['id'].'<br>');
+        $l = Liste::find($args['id']);
 
-        echo($l->items);
+        foreach ($l->items as $value) {
+            echo($value->nom."<br>");
+        }
     }
 );
 $app->get(
