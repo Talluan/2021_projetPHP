@@ -8,7 +8,12 @@ use wish\models\Liste;
 
 $app = new \Slim\App;
 
-
+$app->get(
+    '/',
+    function ($rq, $rs, $args) {
+        $rs->getBody()->write('<h1>Index MyWishList</h1>');
+    }
+);
 $app->get(
     '/listes',
     function ($rq, $rs, $args) {
