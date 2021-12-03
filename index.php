@@ -49,12 +49,6 @@ $app->get(
         echo $tmp->liste."<br>";
     }
 );
-$app->get(
-    '/accueil',
-    function ($rq, $rs, $args) {
-        $rs->getBody()->write("Bienvenue");
-    }
-);
 $app->run();
 
 
