@@ -24,9 +24,9 @@ class ControleurListe {
     /**
      * retourne toutes les listes
      */
-    function getAllListes() {
+    function getAllListes($rq,$rs) {
         $listes = Liste::all();
-        $vueListes = new VueListes();
+        $vueListes = new VueListes($listes);
         $rs->getBody()->write($vueListes->render());
         return $rs;
     }
