@@ -6,6 +6,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use Illuminate\Database\Capsule\Manager as DB;
 use wish\models\Liste;
 use wish\models\Item;
+use wish\controleur\ControleurItem as ControleurItem;
 
 $app = new \Slim\App;
 
@@ -41,12 +42,11 @@ $app->get(
         }
     }
 );
+
 $app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
-        $rs->getBody()->write("item numero: " . $args['id'].'<br>');
-        $tmp = Item::find($args['id']);
-        echo $tmp->liste."<br>";
+        return ControleurItem::getItem($args['id']);
     }
 );
 $app->run();
