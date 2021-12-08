@@ -33,7 +33,7 @@ END;
         $res = $this->modele->getAttribute('id').'<br>';
         $res .= $this->modele->getAttribute('liste_id').'<br>';
         $res .= $this->modele->getAttribute('descr').'<br>';
-        $res .= $this->modele->getAttribute('img').'<br>';
+        $res .= '<img src="../img/'.$this->modele->getAttribute('img').'">'.'<br>';
         $res .= $this->modele->getAttribute('url').'<br>';
         $res .= $this->modele->getAttribute('tarif').'<br>';
         return $res;
