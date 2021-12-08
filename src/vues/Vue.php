@@ -16,8 +16,9 @@ private $html;
           <head>
            <meta charset="utf-8">
            <title> $titre </title>
+           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
           </head>
-         <body> <h1> Robin = Furry </h1>
+         <body> <h1> Robin = Le Très Gros Furry </h1>
           $content
          </body>
         <html>
