@@ -48,7 +48,7 @@ $app->get(
 $app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
-        return ControleurItem::getItem($args['id']);
+        return ControleurItem::getItem($rq,$rs,$args['id']);
     }
 );
 $app->run();
