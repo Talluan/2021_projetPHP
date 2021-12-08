@@ -1,5 +1,7 @@
 <?php
 
+namespace wish\controleur;
+
 use wish\models\Item;
 
 class ControleurItem{
