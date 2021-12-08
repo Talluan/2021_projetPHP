@@ -13,7 +13,14 @@ $app = new \Slim\App;
 $app->get(
     '/',
     function ($rq, $rs, $args) {
-        $rs->getBody()->write('<h1>Index MyWishList</h1>');
+        $html = <<<END
+         <!DOCTYPE html> <html>
+         <body> <h1> Index </h1>
+         <div class="content">
+         </div>
+        </body><html>
+END;
+        $rs->getBody()->write($html);
     }
 );
 $app->get(
