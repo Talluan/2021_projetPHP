@@ -1,6 +1,7 @@
 <?php
 
 namespace wish\vues;
+use wish\vues\Vue;
 
 class VueItem
 {
@@ -15,16 +16,8 @@ class VueItem
     public function render()
     {
         $content = $this->htmlUnItem();
-        $html = <<<END
-         <!DOCTYPE html> <html>
-         <body> <h1> Affichage d'un Item ! </h1>
-         <div class="content">
-           $content
-         </div>
-        </body><html>
-END;
-
-        return $html;
+        $html = new Vue($content,'Item');
+        return $html->getHtml();
     }
 
 

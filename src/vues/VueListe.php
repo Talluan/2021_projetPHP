@@ -13,22 +13,8 @@ class VueListe
     public function render()
     {
         $content = $this->htmlListe();
-        $html = <<<END
-        <!DOCTYPE html> <html>
-        <head>
-            <meta charset="utf-8">
-            <title>Liste numero </title>
-        </head>
-        <body>
-         <div class="content">
-             <h1>
-              Affichage d'une Liste d'Item ! 
-             </h1>
-            $content
-         </div>
-        </body><html>
-END;
-        return $html;
+        $html = new Vue($content,'Liste');
+        return $html->getHtml();
     }
 
     public function htmlListe(){
