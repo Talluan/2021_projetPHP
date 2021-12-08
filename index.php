@@ -27,8 +27,8 @@ $app->get(
     '/listes',
     function ($rq, $rs, $args) {
         $rs->getBody()->write("printage des liste".'<br>');
-        $l = Liste::all();
-        var_dump($l);
+        $c = new ControleurListe();
+        return $c->getAllListes($rq, $rs);
     }
 );
 $app->get(
