@@ -2,7 +2,7 @@
 
 namespace wish\vues;
 
-class VueListe
+class VueListes
 {
     private $model;
     function __construct($liste)
@@ -31,15 +31,17 @@ END;
         return $html;
     }
 
-    public function htmlListe(){
-        $res ="";
-        foreach ($this->model->items as $value) {
-            $attributs=$value->getAttributes();
-            $res .= "<p>";
-            $res .= $attributs['nom']." ".$attributs['tarif']."€ ".$attributs['descr'];
-            $res .= "<img src='../img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' />";
-            $res .= "</p>";
+    public function htmlListe()
+    {
+        $res = "";
+        foreach ($this->model as $liste) {
+            $attributs = $liste->getAttributes();
+            $res .= "<div class='liste'>";
+            $res .= "<h2>" . $attributs['titre'] . "</h2>";
+            $res .= "<p>" . $attributs['description'] . "</p>";
+            $res .= "<p> date d'expiration : " . $attributs['expiration'] . "</p>";
         }
+
         return $res;
     }
 }
