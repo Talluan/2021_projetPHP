@@ -46,6 +46,7 @@ $app->get(
 $app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
+        echo ControleurItem::getItem($args['id'])->getAttribute('nom');
         return ControleurItem::getItem($args['id']);
     }
 );
