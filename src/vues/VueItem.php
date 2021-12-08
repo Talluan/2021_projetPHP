@@ -30,10 +30,12 @@ END;
 
     public function htmlUnItem()
     {
-        $res = "";
-        foreach ($this->modele->items as $value) {
-            $res += "$value->nom.<br>";
-        }
+        $res = $this->modele->getAttribute('id').'<br>';
+        $res .= $this->modele->getAttribute('liste_id').'<br>';
+        $res .= $this->modele->getAttribute('descr').'<br>';
+        $res .= $this->modele->getAttribute('img').'<br>';
+        $res .= $this->modele->getAttribute('url').'<br>';
+        $res .= $this->modele->getAttribute('tarif').'<br>';
         return $res;
     }
 }
