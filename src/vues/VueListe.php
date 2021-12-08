@@ -18,7 +18,7 @@ class VueListe
         <body>
          <div class="content">
              <h1>
-              Affiche d'un Item ! 
+              Affiche d'une Liste d'Item ! 
              </h1>
             $content
          </div>
@@ -30,7 +30,10 @@ END;
     public function htmlListe(){
         $res ="";
         foreach ($this->model->items as $value) {
-            $res+="$value->nom.<br>";
+            $attributs=$value->getAttributes();
+            $res .= "<p>";
+            $res .= $attributs['nom']." ".$attributs['tarif']."€ ".$attributs['descr'];
+            $res .= "</p>";
         }
         return $res;
     }
