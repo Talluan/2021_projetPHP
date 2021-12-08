@@ -17,12 +17,12 @@ class VueListe
         <!DOCTYPE html> <html>
         <head>
             <meta charset="utf-8">
-            <title>Liste numero </title>
+            <title>Listes</title>
         </head>
         <body>
          <div class="content">
              <h1>
-              Affichage d'une Liste d'Item ! 
+              Affichage de toutes les listes
              </h1>
             $content
          </div>
