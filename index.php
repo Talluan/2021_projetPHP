@@ -67,7 +67,7 @@ $app->get(
     '/creerliste',
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
-        return $c->creerListe($rq, $rs);
+        return $c->creationListe($rq, $rs);
     }
 );
 $app->run();

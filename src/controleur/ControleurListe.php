@@ -5,6 +5,7 @@ namespace wish\controleur;
 use wish\models\Liste;
 use wish\vues\VueListe;
 use wish\vues\VueListes;
+use wish\vues\VueCreerListe;
 
 class ControleurListe {
 
@@ -51,7 +52,7 @@ class ControleurListe {
      * @param rs objet de retour contenant la vue 
      */
     function creationListe($rq, $rs) {
-        $vueCreer = new vueCreerListe();
+        $vueCreer = new VueCreerListe($rq);
         $rs->getBody()->write($vueCreer->render());
         return $rs;
     }
