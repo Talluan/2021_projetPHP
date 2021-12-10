@@ -45,7 +45,7 @@ $app->get(
 $app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
-        return ControleurItem::getItem($rq,$rs,$args['id']);
+        return ControleurItem::getItem($rq,$rs,$args);
     }
 );
 
@@ -68,7 +68,7 @@ $app->post(
     '/ajouteritem',
     function ($rq, $rs, $args) {
         $c = new ControleurItem();
-        return $c->ajouterItem($rq, $rs);
+        return $c->ajouterItem($rq, $rs,$args);
     }
 );
 $app->run();
