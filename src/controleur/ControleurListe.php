@@ -31,4 +31,17 @@ class ControleurListe {
         return $rs;
     }
 
+    /**
+     * crée une nouvelle liste
+     * @param rq objet contenant le titre, la description, le user_id et expiration
+     * @param rs objet de retour contenant la vue 
+     */
+    function creerListe($rq, $rs) {
+        $liste = new Liste();
+        $liste->titre = $rq->titre;
+        $liste->description = $rq->description;
+        $liste->user_id = $rq->user_id;
+        $liste->expiration = $rq->expiration;
+        $liste->save();
+    }
 }
