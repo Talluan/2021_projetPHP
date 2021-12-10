@@ -64,7 +64,7 @@ $app->post(
     '/creerliste',
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
-        return $c->creerListe($rq, $rs);
+        return $c->creerListe($rq, $rs, $args);
     }
 );
 $app->post(
