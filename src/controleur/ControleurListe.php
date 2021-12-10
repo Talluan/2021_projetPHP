@@ -16,6 +16,7 @@ class ControleurListe {
      */
     function getAllItems($rq, $rs,$args){
         $num = $args['id'];
+        $_SESSION['id_liste'] = $args['id'];
         $l = Liste::find($num);
         
         $vueListe = new VueListe($l);
