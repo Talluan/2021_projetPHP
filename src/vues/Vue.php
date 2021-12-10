@@ -20,7 +20,7 @@ private $html;
            <title> $titre </title>
            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
           </head>
-         <body> <h1> Robin = Le Très Gros Furry </h1>
+         <body>
           $content
          </body>
         <html>
