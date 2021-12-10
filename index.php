@@ -30,18 +30,15 @@ END;
 $app->get(
     '/listes',
     function ($rq, $rs, $args) {
-        $rs->getBody()->write("printage des liste".'<br>');
         $c = new ControleurListe();
-        return $c->getAllListes($rq, $rs);
+        return $c->getAllListes($rq, $rs, $args);
     }
 );
 $app->get(
     '/liste/{id}',
     function ($rq, $rs, $args) {
-        $rs->getBody()->write("liste numero: " . $args['id'].'<br>');
-        // $l = Liste::find($args['id']);
         $c = new ControleurListe;
-        return $c->getAllItems($rq, $rs, $args['id']);
+        return $c->getAllItems($rq, $rs, $args);
     }
 );
 
@@ -56,7 +53,7 @@ $app->get(
     '/creerliste',
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
-        return $c->creationListe($rq, $rs);
+        return $c->creationListe($rq, $rs, $args);
     }
 );
 

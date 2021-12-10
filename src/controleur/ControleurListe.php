@@ -14,7 +14,8 @@ class ControleurListe {
      * retourne les items de la liste
      * @param $num numéro de la liste dont on veut les items
      */
-    function getAllItems($rq, $rs,$num){
+    function getAllItems($rq, $rs,$args){
+        $num = $args['id'];
         $l = Liste::find($num);
         
         $vueListe = new VueListe($l);
@@ -25,7 +26,7 @@ class ControleurListe {
     /**
      * retourne toutes les listes
      */
-    function getAllListes($rq,$rs) {
+    function getAllListes($rq, $rs, $args) {
         $listes = Liste::all();
         $vueListes = new VueListes($listes);
         $rs->getBody()->write($vueListes->render());
@@ -51,7 +52,7 @@ class ControleurListe {
      * @param rq objet requête
      * @param rs objet de retour contenant la vue 
      */
-    function creationListe($rq, $rs) {
+    function creationListe($rq, $rs, $args) {
         $vueCreer = new VueCreerListe($rq);
         $rs->getBody()->write($vueCreer->render());
         return $rs;
