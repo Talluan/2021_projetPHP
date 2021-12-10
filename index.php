@@ -58,6 +58,14 @@ $app->get(
         return ControleurItem::getItem($rq,$rs,$args['id']);
     }
 );
+
+$app->get(
+    '/creerliste',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->creerListe($rq, $rs);
+    }
+);
 $app->run();
 
 
