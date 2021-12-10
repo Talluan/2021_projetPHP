@@ -5,6 +5,7 @@ namespace wish\controleur;
 use wish\models\Liste;
 use wish\vues\VueListe;
 use wish\vues\VueListes;
+use wish\vues\VueCreerListe;
 
 class ControleurListe {
 
@@ -43,5 +44,16 @@ class ControleurListe {
         $liste->user_id = $rq->user_id;
         $liste->expiration = $rq->expiration;
         $liste->save();
+    }
+
+    /**
+     * méthode qui retourne l'affichage de la création des listes
+     * @param rq objet requête
+     * @param rs objet de retour contenant la vue 
+     */
+    function creationListe($rq, $rs) {
+        $vueCreer = new VueCreerListe($rq);
+        $rs->getBody()->write($vueCreer->render());
+        return $rs;
     }
 }
