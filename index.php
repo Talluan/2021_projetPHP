@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once('vendor/autoload.php');
 require_once('conf/db.php');
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -68,6 +68,13 @@ $app->get(
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
         return $c->creerListe($rq, $rs);
+    }
+);
+$app->post(
+    '/ajouteritem',
+    function ($rq, $rs, $args) {
+        $c = new ControleurItem();
+        return $c->ajouterItem($rq, $rs);
     }
 );
 $app->run();
