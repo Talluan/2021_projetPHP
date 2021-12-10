@@ -15,7 +15,11 @@ $app->get(
     function ($rq, $rs, $args) {
         $html = <<<END
          <!DOCTYPE html> <html>
+         <title> WishList </title>
+         <link rel="icon" href="img/favicon.ico" />
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
          <body background="E.jpg"> <h1> Index </h1>
+         <button type="button" class="btn btn-primary">test</button>
          <div class="content">
          </div>
         </body><html>
@@ -56,6 +60,14 @@ $app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
         return ControleurItem::getItem($rq,$rs,$args['id']);
+    }
+);
+
+$app->get(
+    '/creerliste',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->creerListe($rq, $rs);
     }
 );
 $app->run();
