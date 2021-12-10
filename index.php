@@ -15,7 +15,7 @@ $app->get(
     function ($rq, $rs, $args) {
         $html = <<<END
          <!DOCTYPE html> <html>
-         <body> <h1> Index </h1>
+         <body background="E.jpg"> <h1> Index </h1>
          <div class="content">
          </div>
         </body><html>
