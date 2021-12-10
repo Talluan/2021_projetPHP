@@ -7,6 +7,10 @@ use wish\vues\VueItem;
 
 class ControleurItem{
     
+    /*
+    *fonction qui renvoie l'item demande grace a son id dans l'URL
+    *@return le code html corespondant a la vue
+    */
     public static function getItem($rq,$rs,$id_item) {
         $item =  Item::find($id_item);
         $vueitem = new VueItem($item);
