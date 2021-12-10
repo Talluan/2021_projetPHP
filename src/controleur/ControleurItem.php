@@ -19,5 +19,19 @@ class ControleurItem{
         return $rs;
     }
 
+    public function ajouterItem($rq,$rs,$args) {
+        if(!isset($_SESSION['id_liste'])){
+            $rs->getBody()->write("Vous n'avez pas acces a cette page");
+            return $rs;
+        }
+        $item = new Item();
+        $item->liste_id = $_SESSION['id_liste'];
+        $item->nom = $rq->nom;
+        $item->descr = $rq->description;
+        $item->img = $rq->img;
+        $item->url = $rq->url;
+        $item->tarif = $rq->tarif;
+        $item->save();
+    }
     
 }
