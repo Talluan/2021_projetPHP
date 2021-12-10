@@ -15,8 +15,10 @@ private $html;
          <!DOCTYPE html> <html>
           <head>
            <meta charset="utf-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+           <link rel="icon" href="../img/favicon.ico" />
            <title> $titre </title>
-           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
           </head>
          <body background="../E.jpg"> <h1> Robin = Le Très Gros Furry </h1>
           $content
