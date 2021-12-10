@@ -44,4 +44,15 @@ class ControleurListe {
         $liste->expiration = $rq->expiration;
         $liste->save();
     }
+
+    /**
+     * méthode qui retourne l'affichage de la création des listes
+     * @param rq objet requête
+     * @param rs objet de retour contenant la vue 
+     */
+    function creationListe($rq, $rs) {
+        $vueCreer = new vueCreerListe();
+        $rs->getBody()->write($vueCreer->render());
+        return $rs;
+    }
 }
