@@ -9,7 +9,14 @@ use wish\models\Item;
 use wish\vues\Vue;
 use wish\controleur\ControleurItem as ControleurItem;
 use wish\controleur\ControleurListe as ControleurListe;
-$app = new \Slim\App;
+
+$configuration = [
+    'settings' => [
+    'displayErrorDetails' => true,],
+    'imgPath' => 'img/',
+];
+$c = new \Slim\Container($configuration);
+$app = new \Slim\App($c);
 
 $app->get(
     '/',
