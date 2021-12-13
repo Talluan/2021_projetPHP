@@ -23,12 +23,23 @@ class VueItem
 
     public function htmlUnItem()
     {
-        $res = $this->modele->getAttribute('id').'<br>';
-        $res .= $this->modele->getAttribute('liste_id').'<br>';
-        $res .= $this->modele->getAttribute('descr').'<br>';
-        $res .= '<img src="../img/'.$this->modele->getAttribute('img').'">'.'<br>';
-        $res .= $this->modele->getAttribute('url').'<br>';
-        $res .= $this->modele->getAttribute('tarif').'<br>';
-        return $res;
+        $id = $this->modele->getAttribute('id');
+        $liste_id = $this->modele->getAttribute('liste_id');
+        $descr = $this->modele->getAttribute('descr');
+        $imgurl= '../img/'.$this->modele->getAttribute('img');
+        $url = $this->modele->getAttribute("url");
+        $tarif = $this->modele->getAttribute('tarif');
+        //
+        echo $url;
+        $html = '
+            <div class="row row-cols-6">
+                <div class="item_id">'.$id.'</div>
+                <div class="item_liste_id">'.$liste_id.'</div>
+                <div class="item_descr">'.$descr.'</div>
+                <img src="'.$imgurl.'">
+                <div class="item_url">'.$url.'</div>
+                <div class="item_tarif">'.$tarif.'</div>
+            </div>';
+        return $html;
     }
 }
