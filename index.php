@@ -6,6 +6,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use Illuminate\Database\Capsule\Manager as DB;
 use wish\models\Liste;
 use wish\models\Item;
+use wish\vues\Vue;
 use wish\controleur\ControleurItem as ControleurItem;
 use wish\controleur\ControleurListe as ControleurListe;
 $app = new \Slim\App;
@@ -13,18 +14,14 @@ $app = new \Slim\App;
 $app->get(
     '/',
     function ($rq, $rs, $args) {
-        $html = <<<END
-         <!DOCTYPE html> <html>
-         <title> WishList </title>
-         <link rel="icon" href="img/favicon.ico" />
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
-         <body>
+        $content = <<<END
          <div class="container"> <h1> Index </h1>
          <button type="button" class="btn btn-primary">test</button>
          </div>
-        </body><html>
 END;
-        $rs->getBody()->write($html);
+        $html = new Vue($content,'WishList');
+        return $html->getHtml();
+        //$rs->getBody()->write($html);
     }
 );
 $app->get(
