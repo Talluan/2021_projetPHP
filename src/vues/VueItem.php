@@ -29,8 +29,6 @@ class VueItem
         $imgurl= '../img/'.$this->modele->getAttribute('img');
         $url = $this->modele->getAttribute("url");
         $tarif = $this->modele->getAttribute('tarif');
-        //
-        echo $url;
         $html = '
             <div class="row row-cols-6">
                 <div class="item_id">'.$id.'</div>
