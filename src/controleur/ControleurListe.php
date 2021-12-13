@@ -40,9 +40,11 @@ class ControleurListe {
      */
     function creerListe($rq, $rs, $args) {
         $parsed = $rq->getParsedBody();
+        $nom = filter_var($parsed['nom'], FILTER_SANITIZE_STRING);
+        $descr = filter_var($parsed['descr'], FILTER_SANITIZE_STRING);
         $liste = new Liste();
-        $liste->titre = $parsed['nom'];
-        $liste->description = $parsed['descr'];
+        $liste->titre = $nom;
+        $liste->description = $descr;
         $liste->user_id = 1;
         $liste->save();
     }
