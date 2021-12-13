@@ -26,12 +26,16 @@ class VueCreerListe
         <form action="$host/projetphp/creerliste" method="POST">
         <div class="row">
           <div class="col">
-          <input type="text" name="nom" class="form-control" placeholder="Nom Liste">
+          <label for="nomListe">Nom de la liste</label>
+          <input id="nomListe" type="text" name="nom" class="form-control" placeholder="Nom Liste">
           </div>
+          <div class="col">
           <div class="form-group">
-          <label for="exampleFormControlTextarea1">Description de la liste</label>
-          <textarea name="descr" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <label for="descriptionListe">Description de la liste</label>
+          <textarea name="descr" class="form-control" id="descriptionListe" rows="3"></textarea>
+          </div>
         </div>
+        <hr>
         <button class="btn btn-primary" type="submit">créer</button>
      </div>
     </form>

@@ -22,7 +22,7 @@ class VueListe
         foreach ($this->model->items as $value) {
             $attributs=$value->getAttributes();
             $res .= "<p>";
-            $res .= $attributs['nom']." ".$attributs['tarif']."€ ".$attributs['descr'];
+            $res .= $attributs['id']." ". $attributs['nom']." ".$attributs['tarif']."€ ".$attributs['descr'];
             $res .= "<img src='../img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' />";
             $res .= "</p>";
         }
