@@ -2,6 +2,7 @@
 
 namespace wish\controleur;
 
+use wish\models\Item;
 use wish\models\Liste;
 use wish\vues\VueListe;
 use wish\vues\VueListes;
@@ -29,7 +30,8 @@ class ControleurListe {
      */
     function getAllListes($rq, $rs, $args) {
         $listes = Liste::all();
-        $vueListes = new VueListes($listes,$rq);
+        $items = Item::all();
+        $vueListes = new VueListes($listes,$rq,$items);
         $rs->getBody()->write($vueListes->render());
         return $rs;
     }
