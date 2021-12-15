@@ -21,14 +21,9 @@ $app = new \Slim\App($c);
 $app->get(
     '/',
     function ($rq, $rs, $args) {
-        $content = <<<END
-         <div class="container"> <h1> Index </h1>
-         <button type="button" class="btn btn-primary">test</button>
-         </div>
-END;
+        $content = "";
         $html = new Vue($content,'WishList');
         return $html->getHtml();
-        //$rs->getBody()->write($html);
     }
 );
 $app->get(

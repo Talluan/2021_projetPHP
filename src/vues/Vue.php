@@ -31,8 +31,9 @@ private $html;
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link" href="listes">Listes</a>
+			<li class="nav-item" style="display:flex">
+				<a class="nav-link" href="listes">Listes publiques</a>
+				<a class="nav-link" href="creerliste">Creer votre liste</a>
 			</li>		
 		</ul>
 		
