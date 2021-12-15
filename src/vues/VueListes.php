@@ -5,15 +5,16 @@ namespace wish\vues;
 class VueListes
 {
     private $model;
-    function __construct($liste)
+    function __construct($liste,$rq)
     {
         $this->model = $liste;
+        $this->rq=$rq;
     }
 
     public function render()
     {
         $content = $this->htmlListe();
-        $html = new Vue($content,'Listes');
+        $html = new Vue($content,'Listes',$this->rq);
         return $html->getHtml();
     }
 

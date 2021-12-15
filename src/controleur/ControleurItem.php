@@ -14,7 +14,7 @@ class ControleurItem{
     public static function getItem($rq,$rs,$args) {
         $id_item = $args['id'];
         $item =  Item::find($id_item);
-        $vueitem = new VueItem($item);
+        $vueitem = new VueItem($item,$rq);
         $rs->getBody()->write($vueitem->render());
         return $rs;
     }

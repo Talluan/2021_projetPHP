@@ -5,15 +5,17 @@ namespace wish\vues;
 class VueListe
 {
     private $model;
-    function __construct($liste)
+    private $rq;
+    function __construct($liste,$rq)
     {
         $this->model = $liste;
+        $this->rq = $rq;
     }
 
     public function render()
     {
         $content = $this->htmlListe();
-        $html = new Vue($content,'Liste');
+        $html = new Vue($content,'Liste',$this->rq);
         return $html->getHtml();
     }
 
@@ -26,7 +28,7 @@ class VueListe
 			$res .= '<div class="col-sm-3">';
 			$res .= '<div class="membre-corps"> <div>';
 			$res .= $attributs['nom'];
-			$res .= "<br><img src='../img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' > <br>".$attributs['tarif']."€ </div>";
+			$res .= "<br><img src='".$this->rq->getUri()->getBasePath()."/img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' > <br>".$attributs['tarif']."€ </div>";
 			$res .= '<div class="btn btn-primary">';
 			$res .= "<a href=' ' class='membre-btn-voir'>Voir</a> </div> </div> </div> </div> </div>";
         }

@@ -26,7 +26,7 @@ $app->get(
          <button type="button" class="btn btn-primary">test</button>
          </div>
 END;
-        $html = new Vue($content,'WishList');
+        $html = new Vue($content,'WishList',$rq);
         return $html->getHtml();
         //$rs->getBody()->write($html);
     }

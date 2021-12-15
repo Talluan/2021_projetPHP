@@ -5,15 +5,16 @@ namespace wish\vues;
 class VueCreerListe
 {
     private $model;
-    function __construct($liste)
+    function __construct($liste,$rq)
     {
         $this->model = $liste;
+        $this->rq=$rq;
     }
 
     public function render()
     {
         $content = $this->creerListe();
-        $html = new Vue($content, 'Création Liste');
+        $html = new Vue($content, 'Création Liste',$this->rq);
         return $html->getHtml();
     }
 
