@@ -8,15 +8,16 @@ class VueItem
 
     private $modele;
 
-    public function __construct($mod)
+    public function __construct($mod,$rq)
     {
         $this->modele = $mod;
+        $this->rq=$rq;
     }
 
     public function render()
     {
         $content = $this->htmlUnItem();
-        $html = new Vue($content,'Item');
+        $html = new Vue($content,'Item',$this->rq);
         return $html->getHtml();
     }
 
@@ -26,7 +27,8 @@ class VueItem
         $id = $this->modele->getAttribute('id');
         $liste_id = $this->modele->getAttribute('liste_id');
         $descr = $this->modele->getAttribute('descr');
-        $imgurl= '../img/'.$this->modele->getAttribute('img');
+        $path = $this->rq->getUri()->getBasePath();
+        $imgurl= $path.'/img/'.$this->modele->getAttribute('img');
         $url = $this->modele->getAttribute("url");
         $tarif = $this->modele->getAttribute('tarif');
         $html = '

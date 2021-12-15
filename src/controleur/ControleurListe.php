@@ -19,7 +19,7 @@ class ControleurListe {
         $_SESSION['id_liste'] = $args['id'];
         $l = Liste::find($num);
         
-        $vueListe = new VueListe($l);
+        $vueListe = new VueListe($l,$rq);
         $rs->getBody()->write($vueListe->render());
         return $rs;
     }
@@ -29,7 +29,7 @@ class ControleurListe {
      */
     function getAllListes($rq, $rs, $args) {
         $listes = Liste::all();
-        $vueListes = new VueListes($listes);
+        $vueListes = new VueListes($listes,$rq);
         $rs->getBody()->write($vueListes->render());
         return $rs;
     }
@@ -56,7 +56,7 @@ class ControleurListe {
      * @param rs objet de retour contenant la vue 
      */
     function creationListe($rq, $rs, $args) {
-        $vueCreer = new VueCreerListe($rq);
+        $vueCreer = new VueCreerListe($rq,$rq);
         $rs->getBody()->write($vueCreer->render());
         return $rs;
     }

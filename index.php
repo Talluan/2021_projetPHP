@@ -22,7 +22,7 @@ $app->get(
     '/',
     function ($rq, $rs, $args) {
         $content = "";
-        $html = new Vue($content,'WishList');
+        $html = new Vue($content,'WishList',$rq);
         return $html->getHtml();
     }
 );
