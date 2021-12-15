@@ -35,7 +35,8 @@ private $html;
 			<li class="nav-item" style="display:flex">
 				<a class="nav-link" href="listes">Listes publiques</a>
 				<a class="nav-link" href="creerliste">Creer votre liste</a>
-			</li>		
+				<a class="nav-link" href="connexion" opacity="100%"></a>
+			</li>	
 		</ul>
 		
 	</div>
