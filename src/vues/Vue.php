@@ -38,7 +38,6 @@ private $html;
 				<a class="nav-link" href="connexion" opacity="100%"></a>
 			</li>	
 		</ul>
-		
 	</div>
 </nav>
           $content
