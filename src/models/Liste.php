@@ -1,7 +1,6 @@
 <?php
 
 namespace wish\models;
-use \Exception;
 
 class Liste extends \Illuminate\Database\Eloquent\Model
 {

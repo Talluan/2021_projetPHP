@@ -4,6 +4,7 @@ require_once('vendor/autoload.php');
 require_once('conf/db.php');
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use Illuminate\Database\Capsule\Manager as DB;
+use wish\controleur\ControleurConnexion;
 use wish\models\Liste;
 use wish\models\Item;
 use wish\vues\Vue;
@@ -53,6 +54,20 @@ $app->get(
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
         return $c->creationListe($rq, $rs, $args);
+    }
+);
+
+$app->get(
+    '/connexion',
+    function ($rq, $rs, $args) {
+        return ControleurConnexion::afficherConnexion($rq, $rs,$args);
+    }
+);
+
+$app->post(
+    '/connexion',
+    function ($rq, $rs, $args) {
+        return ControleurConnexion::seConnecter($rq, $rs,$args);
     }
 );
 

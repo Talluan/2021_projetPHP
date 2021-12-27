@@ -13,7 +13,6 @@ class ControleurListe {
     
     /**
      * retourne les items de la liste
-     * @param $num numéro de la liste dont on veut les items
      */
     function getAllItems($rq, $rs,$args){
         $num = $args['id'];
@@ -58,7 +57,7 @@ class ControleurListe {
      * @param rs objet de retour contenant la vue 
      */
     function creationListe($rq, $rs, $args) {
-        $vueCreer = new VueCreerListe($rq,$rq);
+        $vueCreer = new VueCreerListe($rq, $rq);
         $rs->getBody()->write($vueCreer->render());
         return $rs;
     }

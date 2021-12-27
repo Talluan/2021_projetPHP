@@ -1,7 +1,6 @@
 <?php
 
 namespace wish\models;
-use \Exception;
 
 class Item extends \Illuminate\Database\Eloquent\Model
 {
@@ -9,8 +8,7 @@ class Item extends \Illuminate\Database\Eloquent\Model
     protected $primaryKey = "id";
     public $timestamps = false;
 
-    public function liste()
-    {
+    public function liste() {
         return $this->belongsTo('wish\models\Liste', 'liste_id');
     }
 
