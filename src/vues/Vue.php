@@ -2,8 +2,6 @@
 
 namespace wish\vues;
 
-use wish\models\User;
-
 class Vue
 {
     private $html;
