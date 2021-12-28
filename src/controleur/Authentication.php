@@ -30,6 +30,7 @@ class Authentication {
     static function authenticate($u, $p) {
         $hash = $u->passwd;
         if (password_verify($p, $hash)) {
+            Authentication::loadProfile($u);
             return true;
         }
         else {
@@ -38,7 +39,27 @@ class Authentication {
         }
     }
 
+    /**
+     * méthode qui charge le profil de l'utilisateur dans une variable de session
+     * @param u objet user correspondant à l'utilisateur
+     */
     static function loadProfile($u) {
+        $data = [
+            'id' => $u->id,
+            'pseudo' => $u->pseudo,
+            'auth_lvl' => $u->role->auth_level
+        ];
+        $_SESSION['user'] = $data;
+    }
+
+    /**
+     * méthode qui libère la variable de session user
+     */
+    static function freeProfile() {
+        unset($_SESSION['user']);
+    }
+
+    static function checkAccessRight() {
 
     }
 

@@ -2,6 +2,8 @@
 
 namespace wish\vues;
 
+use wish\models\User;
+
 class Vue
 {
     private $html;
@@ -12,8 +14,49 @@ class Vue
      */
     public function __Construct($content, $titre, $rq)
     {
+        $page = $this->setTemplate($content, $titre, $rq);
+        $this->html = $page;
+    }
+
+    public function render() {
+        $this->gethtml();
+    }
+
+    public function isConnected() {
+        if (isset($_SESSION['user'])) return true;
+        else return false;
+    }
+
+    public function setTemplate($content, $titre, $rq) {
+        $categories = <<<END
+        <li class="nav-item d-flex">
+            <a class="nav-link" href="listes">Listes publiques</a>
+        </li>
+        <li class="nav-item d-flex">
+            <a class="nav-link" href="creerliste">Creer votre liste</a>
+        </li>
+        <li class="nav-item d-flex">
+        <a class="nav-link" href="connexion">Connexion</a>
+        </li>
+    </ul>
+END;
+        if ($this->isConnected()) {
+            $nom = $_SESSION['user']['pseudo'];
+            $categories = <<<END
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="listes">Listes publiques</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="creerliste">Creer votre liste</a>
+                </li>
+            </ul>
+
+            <span class="navbar-brand">$nom</span>
+            <a class="nav-link" href="deco">Deconnexion</a>
+END;
+        }
         $path = $rq->getUri()->getBasePath();
-        $this->html = <<<END
+        $temp = <<<END
          <!DOCTYPE html> <html>
           <head>
            <meta charset="utf-8">
@@ -32,19 +75,16 @@ class Vue
 	        </button>
 
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		        <ul class="navbar-nav mr-auto">
-                    <li class="nav-item d-flex">
-                        <a class="nav-link" href="listes">Listes publiques</a>
-                        <a class="nav-link" href="creerliste">Creer votre liste</a>
-                        <a class="nav-link" href="connexion">Connexion</a>
-                    </li>
-		        </ul>
+		        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        $categories
+
 	        </div>
         </nav>
           $content
          </body>
         <html>
 END;
+        return $temp;
     }
 
     public function getHtml()

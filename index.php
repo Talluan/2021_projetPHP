@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once('vendor/autoload.php');
 require_once('conf/db.php');
+session_start();
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use Illuminate\Database\Capsule\Manager as DB;
 use wish\controleur\ControleurConnexion;
@@ -54,6 +54,13 @@ $app->get(
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
         return $c->creationListe($rq, $rs, $args);
+    }
+);
+
+$app->get(
+    '/deco',
+    function ($rq, $rs, $args) {
+        return ControleurConnexion::seDeconnecter($rq, $rs,$args);
     }
 );
 

@@ -2,6 +2,8 @@
 
 namespace wish\vues;
 
+use wish\controleur\Authentication;
+
 class VueConnexion
 {
     private $error;
@@ -14,15 +16,21 @@ class VueConnexion
 
     public function render()
     {
-        $content = $this->creerVue();
-        if (isset($this->error)) {
-            $content .= $this->addError();
-        }
-        $html = new Vue($content, 'Connexion', $this->rq);
-        return $html->getHtml();
+        // Authentication::freeProfile();
+        // if (isset($_SESSION['user'])) {
+            
+        // }
+        // else {
+            $content = $this->creerVueConnexion();
+            if (isset($this->error)) {
+                $content .= $this->addError();
+            }
+            $html = new Vue($content, 'Connexion', $this->rq);
+            return $html->getHtml();
+        // }
     }
 
-    public function creerVue()
+    public function creerVueConnexion()
     {
         $host = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'];
         $res = <<<END
@@ -33,12 +41,12 @@ class VueConnexion
                     <h3> Se connecter </h3>
                     <div class="row">
                         <div class="col">
-                            <label for="nomListe">Pseudo</label>
-                            <input id="nomListe" type="text" name="pseudo" class="form-control" placeholder="Pseudonyme">
+                            <label for="connecnomListe">Pseudo</label>
+                            <input id="connecnomListe" type="text" name="pseudo" class="form-control" placeholder="Pseudonyme">
                         </div>
                         <div class="col">
-                            <label for="motDePasse">Mot de Passe</label>
-                            <input id="motDePasse" type="password" name="passw" class="form-control" placeholder="Mot De Passe">
+                            <label for="connecmotDePasse">Mot de Passe</label>
+                            <input id="connecmotDePasse" type="password" name="passw" class="form-control" placeholder="Mot De Passe">
                         </div>
                     </div>
                     <hr>
@@ -139,4 +147,17 @@ END;
         }
         return $res;
     }
+
+
+
+    public function creerVueConnecte() {
+        $host = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'];
+        $res = <<<END
+        <div class="container">
+        
+        </div>
+END;
+        return $res;
+    }
+
 }
