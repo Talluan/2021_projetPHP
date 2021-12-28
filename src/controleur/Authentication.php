@@ -7,13 +7,18 @@ use wish\exception\WrongPasswordException;
 
 class Authentication {
 
+    /**
+     * méthode qui permet de créer un nouvel utilisateur et le sauvegarde dans la bdd
+     * @param pseudo nom de l'utilisateur
+     * @param password mot de passe pas encore hashé
+     */
     static function createUser($pseudo, $password) {
-        $tabUsers = User::where('pseudo', '=', $pseudo)->get();
-        if (isset($tabUsers)) {
-            echo("DEJA PRIS");
-        }
         $hash = password_hash($password, PASSWORD_DEFAULT);
-
+        $u = new User();
+        $u->pseudo = $pseudo;
+        $u->passwd = $hash;
+        $u->roleid = 2;
+        $u->save();
     }
 
     /**

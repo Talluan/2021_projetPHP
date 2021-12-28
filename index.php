@@ -65,9 +65,9 @@ $app->get(
 );
 
 $app->post(
-    '/connexion',
+    '/connexion/{type}',
     function ($rq, $rs, $args) {
-        return ControleurConnexion::seConnecter($rq, $rs,$args);
+        return ControleurConnexion::orienter($rq, $rs,$args);
     }
 );
 
