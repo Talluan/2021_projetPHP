@@ -21,8 +21,6 @@ class VueListe
 
     public function htmlListe(){
         $res ="";
-        $res .='<div class="container">';
-		$res .='<div class="row">';
         foreach ($this->model->items as $value) {
             $attributs=$value->getAttributes();    
 			$res .= '<div class="col-sm-3">';
