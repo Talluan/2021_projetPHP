@@ -71,6 +71,14 @@ $app->get(
     }
 );
 
+$app->get(
+    '/mylist/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->getAllItems($rq, $rs, $args);
+    }
+);
+
 $app->post(
     '/connexion/{type}',
     function ($rq, $rs, $args) {
