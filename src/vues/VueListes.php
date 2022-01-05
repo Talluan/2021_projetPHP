@@ -43,8 +43,9 @@ END;
                 $attributItem = $item->getAttributes();
                 if ($attributItem['liste_id'] == $num) {
                     $img = $this->rq->getUri()->getBasePath() . "/img/" . $attributItem['img'];
+                    $itempath = '"'.$this->rq->getUri()->getBasePath() . "/item/" . $attributItem['id'].'"';
                     $res .= <<<END
-       <img class="mr-3" src="$img" alt="image Item" width="100" height="100">
+       <a href=$itempath><img class="mr-3 src="$img" alt="image Item" width="100" height="100"><a>
 END;
                 }
             }
