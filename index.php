@@ -43,7 +43,7 @@ $app->get(
 );
 
 $app->get(
-    '/Meslistes',
+    '/meslistes',
     function ($rq, $rs, $args) {
         $c = new ControleurListe;
         return $c->getAllMyListes($rq, $rs, $args);
