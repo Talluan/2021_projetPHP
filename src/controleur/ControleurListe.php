@@ -72,8 +72,10 @@ class ControleurListe {
         } else {
             $liste->user_id = -1;
         }
-        
         $liste->save();
+        $path = $rq->getUri()->getBasePath();
+        $rs = $rs->withRedirect($path);
+        return $rs;
     }
 
     /**
