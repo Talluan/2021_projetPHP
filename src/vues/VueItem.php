@@ -32,13 +32,39 @@ class VueItem
         $url = $this->modele->getAttribute("url");
         $tarif = $this->modele->getAttribute('tarif');
         $html = '
-            <div class="row row-cols-6">
-                <div class="item_id">'.$id.'</div>
-                <div class="item_liste_id">'.$liste_id.'</div>
-                <div class="item_descr">'.$descr.'</div>
-                <img src="'.$imgurl.'">
-                <div class="item_url">'.$url.'</div>
-                <div class="item_tarif">'.$tarif.'</div>
+            <div class="container-sm">
+                <h2>Item numéro '. $id .'</h3>
+                <div class="row justify-content-md-center">
+                    <div class="col justify-content-md-center text-center">
+                    <div class="row">
+                        <div class="col-8">
+                            Appartenance à une liste :
+                        </div>
+                        <div class="col-4">'
+                            .$liste_id.
+                        '</div>
+                    </div>
+                    <div class="row">
+                    <div class="col-8">
+                        Description :
+                    </div>
+                    <div class="col-4">'
+                        .$descr.
+                    '</div>
+                    </div>   
+                    <div class="row">
+                        <div class="col-8">
+                            Prix :
+                        </div>
+                        <div class="col-4">'
+                            .$tarif.
+                        '</div>
+                    </div>   
+                    </div>
+                    <div class="col-4">
+                        <img src="'.$imgurl.'"style="object-fit:contain;width:300px;height:auto;">
+                    </div>
+                </div>
             </div>';
         return $html;
     }
