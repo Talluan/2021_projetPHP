@@ -23,15 +23,16 @@ class Vue
     }
 
     public function setTemplate($content, $titre, $rq) {
+        $path = $rq->getUri()->getBasePath();
         $categories = <<<END
         <li class="nav-item d-flex">
-            <a class="nav-link" href="listes">Listes publiques</a>
+            <a class="nav-link" href="$path/listes">Listes publiques</a>
         </li>
         <li class="nav-item d-flex">
-            <a class="nav-link" href="creerliste">Creer votre liste</a>
+            <a class="nav-link" href="$path/creerliste">Creer votre liste</a>
         </li>
         <li class="nav-item d-flex">
-        <a class="nav-link" href="connexion">Connexion</a>
+        <a class="nav-link" href="$path/connexion">Connexion</a>
         </li>
     </ul>
 END;
@@ -39,21 +40,20 @@ END;
             $nom = $_SESSION['user']['pseudo'];
             $categories = <<<END
                 <li class="nav-item d-flex">
-                    <a class="nav-link" href="listes">Listes publiques</a>
+                    <a class="nav-link" href="$path/listes">Listes publiques</a>
                 </li>
                 <li class="nav-item d-flex">
-                    <a class="nav-link" href="creerliste">Creer votre liste</a>
+                    <a class="nav-link" href="$path/creerliste">Creer votre liste</a>
                 </li>
                 <li class="nav-item d-flex">
-                    <a class="nav-link" href="Meslistes">Mes Listes</a>
+                    <a class="nav-link" href="$path/Meslistes">Mes Listes</a>
                 </li>
             </ul>
 
             <span class="navbar-brand">$nom</span>
-            <a class="nav-link" href="deco">Deconnexion</a>
+            <a class="nav-link" href="$path/deco">Deconnexion</a>
 END;
         }
-        $path = $rq->getUri()->getBasePath();
         $temp = <<<END
          <!DOCTYPE html> <html>
           <head>
