@@ -6,6 +6,7 @@ use wish\models\Item;
 use wish\models\Liste;
 use wish\vues\VueListe;
 use wish\vues\VueListes;
+use wish\vues\VueMesListes;
 use wish\vues\VueCreerListe;
 
 class ControleurListe {
@@ -25,7 +26,7 @@ class ControleurListe {
     }
 
     /**
-     * retourne toutes les listes
+     * retourne toutes les listes publiques
      */
     function getAllListes($rq, $rs, $args) {
         $listes = Liste::all();
@@ -33,6 +34,25 @@ class ControleurListe {
         $vueListes = new VueListes($listes,$rq,$items);
         $rs->getBody()->write($vueListes->render());
         return $rs;
+    }
+
+    /**
+     * retourne toutes les listes de l'utilisateur (seulement si connecté pour l'instant)
+     */
+    function getAllMyListes($rq, $rs, $args) {
+        if (Authentication::isconnected()){
+          $listes = Liste::all();
+          $items = Item::all();
+          $vueMesListes = new VueMesListes($listes,$rq,$items,$_SESSION['user']['id']);
+          $rs->getBody()->write($vueMesListes->render());
+         return $rs;
+        } else {
+         $listes = Liste::all();
+         $items = Item::all();
+         $vueListes = new VueListes($listes,$rq,$items);
+         $rs->getBody()->write($vueListes->render());
+        return $rs;
+        }
     }
 
     /**

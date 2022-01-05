@@ -2,8 +2,6 @@
 
 namespace wish\vues;
 
-use wish\controleur\Authentication;
-
 class Vue
 {
     private $html;
@@ -22,6 +20,11 @@ class Vue
         $this->gethtml();
     }
 
+    public function isConnected() {
+        if (isset($_SESSION['user'])) return true;
+        else return false;
+    }
+
     public function setTemplate($content, $titre, $rq) {
         $categories = <<<END
         <li class="nav-item d-flex">
@@ -35,7 +38,7 @@ class Vue
         </li>
     </ul>
 END;
-        if (Authentication::isConnected()) {
+        if ($this->isConnected()) {
             $nom = $_SESSION['user']['pseudo'];
             $categories = <<<END
                 <li class="nav-item d-flex">
@@ -43,6 +46,9 @@ END;
                 </li>
                 <li class="nav-item d-flex">
                     <a class="nav-link" href="creerliste">Creer votre liste</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="Meslistes">Mes Listes</a>
                 </li>
             </ul>
 
@@ -59,6 +65,7 @@ END;
            <link rel="icon" href="$path/img/favicon.ico" />
            <title> $titre </title>
            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+           <link href="$path/css/style.css" rel="stylesheet" >
           </head>
         <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
