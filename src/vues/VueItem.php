@@ -33,12 +33,12 @@ class VueItem
         $tarif = $this->modele->getAttribute('tarif');
         $html = '
             <div class="container-sm">
-                <h2>Item numéro '. $id .'</h3>
-                <div class="row justify-content-md-center">
-                    <div class="col justify-content-md-center text-center">
+                <h1>Item numéro '. $id .'</h1>
+                <div class="row align-items-center">
+                    <div class="col justify-content-md-center text-center align-middle">
                     <div class="row">
                         <div class="col-8">
-                            Appartenance à une liste :
+                            <h2>Appartenance à une liste :</h2>
                         </div>
                         <div class="col-4">'
                             .$liste_id.
@@ -46,7 +46,7 @@ class VueItem
                     </div>
                     <div class="row">
                     <div class="col-8">
-                        Description :
+                        <h2>Description :</h2>
                     </div>
                     <div class="col-4">'
                         .$descr.
@@ -54,7 +54,7 @@ class VueItem
                     </div>   
                     <div class="row">
                         <div class="col-8">
-                            Prix :
+                            <h2>Prix :</h2>
                         </div>
                         <div class="col-4">'
                             .$tarif.
