@@ -4,6 +4,8 @@ namespace wish\controleur;
 
 use wish\models\Item;
 use wish\vues\VueItem;
+use wish\controleur\Authentication;
+use wish\vues\VueAjouterItem;
 
 class ControleurItem{
     
@@ -19,7 +21,7 @@ class ControleurItem{
         return $rs;
     }
 
-    public function ajouterItem($rq,$rs,$args) {
+    public function traiterItem($rq,$rs,$args) {
         if(!isset($_SESSION['id_liste'])){
             $rs->getBody()->write("Vous n'avez pas acces a cette page");
             return $rs;
@@ -32,6 +34,16 @@ class ControleurItem{
         $item->url = $rq->url;
         $item->tarif = $rq->tarif;
         $item->save();
+    }
+
+    public function ajouterItem($rq,$rs,$args){
+        if(!Authentication::isconnected()){
+            $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
+            return $rs;
+        }
+        $vueajouteritem = new VueAjouterItem($rq);
+        $rs->getBody()->write($vueajouteritem->render());
+        return $rs;
     }
     
 }

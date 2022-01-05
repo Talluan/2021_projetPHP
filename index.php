@@ -43,14 +43,6 @@ $app->get(
 );
 
 $app->get(
-    '/Meslistes',
-    function ($rq, $rs, $args) {
-        $c = new ControleurListe;
-        return $c->getAllMyListes($rq, $rs, $args);
-    }
-);
-
-$app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
         return ControleurItem::getItem($rq,$rs,$args);
@@ -102,6 +94,13 @@ $app->post(
     }
 );
 $app->post(
+    '/ajouteritem',
+    function ($rq, $rs, $args) {
+        $c = new ControleurItem();
+        return $c->traiterItem($rq, $rs,$args);
+    }
+);
+$app->get(
     '/ajouteritem',
     function ($rq, $rs, $args) {
         $c = new ControleurItem();

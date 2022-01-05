@@ -55,7 +55,8 @@ END;
 
         }
         $res .= "</div><br>";
-        $res .= "<a class='btn btn-success'>Ajouter un item</a><a class='btn btn-info'>Partager la liste</a>";
+        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a><a class='btn btn-info'>Partager la liste</a>";
         $message = '
                         <form action="$host/projetphp/connexion" method="POST">
                             <div class="row">
