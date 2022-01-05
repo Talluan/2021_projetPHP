@@ -2,6 +2,8 @@
 
 namespace wish\vues;
 
+use wish\controleur\Authentication;
+
 class Vue
 {
     private $html;
@@ -20,11 +22,6 @@ class Vue
         $this->gethtml();
     }
 
-    public function isConnected() {
-        if (isset($_SESSION['user'])) return true;
-        else return false;
-    }
-
     public function setTemplate($content, $titre, $rq) {
         $categories = <<<END
         <li class="nav-item d-flex">
@@ -38,7 +35,7 @@ class Vue
         </li>
     </ul>
 END;
-        if ($this->isConnected()) {
+        if (Authentication::isConnected()) {
             $nom = $_SESSION['user']['pseudo'];
             $categories = <<<END
                 <li class="nav-item d-flex">
