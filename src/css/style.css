@@ -1,0 +1,59 @@
+body {
+	background: #252525;
+}
+h1{
+	color: azure;
+}
+.bg-light {
+	background-color: #2980b9 !important;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: #ecf0f1;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.nav-link:focus {
+	color: white;
+}
+
+
+input[type='text'] {
+	width: 100%;
+	padding: 5px 10px
+}
+
+/* ///////////////////
+///// MEMBRES
+/* /////////////////// */
+
+.membre-corps {
+	background: white;
+	text-align: center;
+	box-shadow: 5px 5px 15px rgba(0, 0, 0, .3);
+	border-radius: 10px;
+	padding: 10px;
+	margin: 15px 0;
+}
+
+.mambre-btn {
+	margin: 20px 0
+}
+
+.membre-btn-voir {
+	background: #2980b9;
+	color: white;
+	text-decoration: none;
+	outline: none;
+	border-radius: 10px;
+	padding: 5px 20px;
+	transition: ease-in .5s all;
+}
+
+.membre-btn-voir:hover {
+	transition: ease-out .5s all;
+	color: white;
+	text-decoration: none;
+	background: rgba(41, 128, 185, .9);
+}

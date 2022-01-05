@@ -21,7 +21,42 @@ class VueListe
 
     public function htmlListe(){
         $res ="";
-        $message = '<div class="container">
+        
+        $res.='
+        <div class="container">
+        <div class="row">
+        ';
+        foreach ($this->model->items as $value) {
+            $attributs=$value->getAttributes();
+            $nom=$attributs['nom'];
+            $img=$this->rq->getUri()->getBasePath()."/img/".$attributs['img'];
+            $voir=$this->rq->getUri()->getBasePath()."\/item/".$attributs['id'];
+            $html=<<<END
+            <div class="col-sm-3">
+					<div class="membre-corps">
+						<div>
+							$nom
+							<br><img src="$img" alt="" width="100" height="100"> 
+						</div>
+						<div class="mambre-btn">
+							<a href="$voir" class='btn btn-primary'>Voir</a>
+						</div>
+					</div>
+				</div>
+END;
+			// $res .= '<div class="col-sm-3">';
+			// $res .= '<div class="membre-corps">';
+			// $res .= $attributs['nom'];
+			// $res .= "<br><img src='".$this->rq->getUri()->getBasePath()."/img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' > <br>".$attributs['tarif']."€ </div>";
+			// $res .= '<div class="btn btn-primary">';
+			// $res .= "<a class='btn btn-primary' href=".$this->rq->getUri()->getBasePath()."\/item/".$attributs['id'].">Voir</a>";
+            // $res .= '</div> </div> </div> </div> </div>';
+        $res.=$html;
+
+        }
+        $res .= "</div><br>";
+        $res .= "<a class='btn btn-success'>Ajouter un item</a><a class='btn btn-info'>Partager la liste</a>";
+        $message = '
                         <form action="$host/projetphp/connexion" method="POST">
                             <div class="row">
                                 <div class="col">
@@ -32,22 +67,10 @@ class VueListe
                                 <button class="btn btn-primary" type="submit">Publier</button>
                             </div>
                         </form>
-                    </div>' ;
+                    ' ;
         $res .= $message;
-        foreach ($this->model->items as $value) {
-            $attributs=$value->getAttributes();    
-			$res .= '<div class="col-sm-3">';
-			$res .= '<div class="membre-corps"> <div>';
-			$res .= $attributs['nom'];
-			$res .= "<br><img src='".$this->rq->getUri()->getBasePath()."/img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' > <br>".$attributs['tarif']."€ </div>";
-			$res .= '<div class="btn btn-primary">';
-			$res .= "<a class='btn btn-primary' href=".$this->rq->getUri()->getBasePath()."\/item/".$attributs['id'].">Voir</a>";
-            $res .= '</div> </div> </div> </div> </div>';
-        }
-        $res .= "<a class='membre-btn-partager'>Partager la liste</a>";
-        $res .= "<div id='sharelink'>
-                    xamp
-                </div>";
+        $res .= "</div>";
+
         return $res;
     }
 }
