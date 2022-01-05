@@ -43,6 +43,14 @@ $app->get(
 );
 
 $app->get(
+    '/Meslistes',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->getAllMyListes($rq, $rs, $args);
+    }
+);
+
+$app->get(
     '/item/{id}',
     function ($rq, $rs, $args) {
         return ControleurItem::getItem($rq,$rs,$args);
