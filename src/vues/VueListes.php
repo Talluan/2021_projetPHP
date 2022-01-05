@@ -35,7 +35,7 @@ class VueListes
 END;
             $res .= <<<END
             <div class="media-body">
-                <a class="link-dark" href="$listepath"><h5 class="mt-0 mb-1">$titre</h5></a>
+                <a class="link-dark"    href="$listepath"><h5 class="mt-0 mb-1">$titre</h5></a>
                 $msg
               </div>  
 END;
