@@ -26,7 +26,7 @@ class ControleurListe {
     }
 
     /**
-     * retourne toutes les listes
+     * retourne toutes les listes publiques
      */
     function getAllListes($rq, $rs, $args) {
         $listes = Liste::all();
@@ -36,6 +36,9 @@ class ControleurListe {
         return $rs;
     }
 
+    /**
+     * retourne toutes les listes de l'utilisateur (seulement si connecté pour l'instant)
+     */
     function getAllMyListes($rq, $rs, $args) {
         if (Authentication::isconnected()){
           $listes = Liste::all();
