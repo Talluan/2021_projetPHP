@@ -67,7 +67,12 @@ class ControleurListe {
         $liste = new Liste();
         $liste->titre = $nom;
         $liste->description = $descr;
-        $liste->user_id = 1;
+        if(Authentication::isConnected()){
+            $liste->user_id = $_SESSION['user']['id'];
+        } else {
+            $liste->user_id = -1;
+        }
+        
         $liste->save();
     }
 
