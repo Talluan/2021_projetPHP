@@ -43,6 +43,7 @@ CREATE TABLE `liste` (
   `description` text COLLATE utf8_unicode_ci,
   `expiration` date DEFAULT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cookieUser` int(11) DEFAULT NULL,
   PRIMARY KEY (`no`),
   FOREIGN KEY (`user_id`) REFERENCES user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

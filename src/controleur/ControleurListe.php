@@ -46,13 +46,16 @@ class ControleurListe {
           $vueMesListes = new VueMesListes($listes,$rq,$items,$_SESSION['user']['id']);
           $rs->getBody()->write($vueMesListes->render());
          return $rs;
-        } else {
-         $listes = Liste::all();
-         $items = Item::all();
-         $vueListes = new VueListes($listes,$rq,$items);
-         $rs->getBody()->write($vueListes->render());
-        return $rs;
-        }
+        } else { 
+            if(isset($_COOKIE['WishListe2021AuChocolat'])){
+                $track_user_code = $_COOKIE[ 'WishListe2021AuChocolat' ];
+                $listes = Liste::all();
+                $items = Item::all();
+                $vueListes = new VueMesListes($listes,$rq,$items,$track_user_code);
+                $rs->getBody()->write($vueListes->render());
+                return $rs;
+                } 
+            }
     }
 
     /**
@@ -70,7 +73,12 @@ class ControleurListe {
         if(Authentication::isConnected()){
             $liste->user_id = $_SESSION['user']['id'];
         } else {
-            $liste->user_id = -1;
+            {
+                $nomCookie = 'WishListe2021AuChocolat';
+                $valCookie = random_int(intval(-99999999999),-2);
+                setcookie($nomCookie, $valCookie, time() + 60*60*24*30);
+                $liste->cookieUser = $valCookie;
+            }
         }
         $liste->save();
         $path = $rq->getUri()->getBasePath();
