@@ -25,7 +25,7 @@ create table user (
 
 DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `liste_id` int(11) NOT NULL,
   `nom` text NOT NULL,
   `descr` text,
@@ -43,10 +43,20 @@ CREATE TABLE `liste` (
   `description` text COLLATE utf8_unicode_ci,
   `expiration` date DEFAULT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cookieUser` int(11) DEFAULT NULL,
   PRIMARY KEY (`no`),
   FOREIGN KEY (`user_id`) REFERENCES user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message`(
+  `message_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `liste_id` int(11) NOT NULL,
+  `pseudo_id` int(11) NOT NULL,
+  `message` text COLLATE utf8_unicode_ci,
+  FOREIGN KEY (`pseudo_id`) REFERENCES user(id),
+  FOREIGN KEY (`liste_id`) REFERENCES liste(no)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- INSERTION

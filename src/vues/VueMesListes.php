@@ -51,6 +51,31 @@ END;
 END;
                 }
             }
+        } else {
+            if($attributListe['cookieUser'] == $this->id){
+                $titre = $attributListe['titre'];
+                $msg = $attributListe['description'] . " | " . $attributListe['expiration'];
+                $res .= <<<END
+                <ul class="list-unstyled">
+                <li class="media">
+END;
+                $res .= <<<END
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1">$titre</h5>
+                    $msg
+                  </div>  
+END;
+                $num = $attributListe['no'];
+                foreach ($this->modeleItem as $item) {
+                    $attributItem = $item->getAttributes();
+                    if ($attributItem['liste_id'] == $num) {
+                        $img = $this->rq->getUri()->getBasePath() . "/img/" . $attributItem['img'];
+                        $res .= <<<END
+           <img class="mr-3" src="$img" alt="image Item" width="100" height="100">
+END;
+                    }
+                }
+            }
         }
         }
         $res .= "</li></ul>";
