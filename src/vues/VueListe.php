@@ -2,6 +2,8 @@
 
 namespace wish\vues;
 
+use wish\models\User as User;
+
 class VueListe
 {
     private $model;
@@ -57,11 +59,44 @@ END;
         $res .= "</div><br>";
         $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
         $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a><a class='btn btn-info'>Partager la liste</a>";
+        $liste_messages = 
+        "</div>
+            <hr>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-3'>
+                        <div class='membre-corps'>
+                            <div>
+                                <h3>Messages</h3>
+                            </div>
+                            <div class='row'>";
+        //recherche des messages de la liste
+        $n = 0;
+        foreach ($this->model->messages as $value) {
+            $n += 1;
+            $attributs=$value->getAttributes();
+            $pseudoid = $attributs['pseudo_id'];
+            $pseudo = User::where('id','=',$pseudoid)->first()->pseudo;
+            echo "pseudo : ".$pseudo;
+            $liste_messages .= "<div>".$pseudo.' : "'.$attributs['message'].'"'."</div>";
+        }
+        if($n === 0){
+            $liste_messages .= "<div>Pas de message concernant cette liste</div>";
+        }
+        //ajout des messages à l'html
+        $liste_messages .= "
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <hr>";
+        $res .= $liste_messages;
         $message = '
                         <form action="$host/projetphp/connexion" method="POST">
                             <div class="row">
                                 <div class="col">
-                                    <label for="nomListe">Votre message</label>
+                                    <label for="nomListe">Publier un message</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
                                 <hr>
