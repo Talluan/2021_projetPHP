@@ -10,6 +10,7 @@ use wish\models\Item;
 use wish\vues\Vue;
 use wish\controleur\ControleurItem as ControleurItem;
 use wish\controleur\ControleurListe as ControleurListe;
+use wish\controleur\ControleurMessage as ControleurMessage;
 
 $configuration = [
     'settings' => [
@@ -37,6 +38,16 @@ $app->get(
 $app->get(
     '/liste/{id}',
     function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->getAllItems($rq, $rs, $args);
+    }
+);
+
+$app->post(
+    '/liste/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurMessage();
+        $c->creerMessage($rq,$rs,$args);
         $c = new ControleurListe;
         return $c->getAllItems($rq, $rs, $args);
     }
@@ -116,6 +127,7 @@ $app->get(
     }
 );
 $app->run();
+
 
 
 

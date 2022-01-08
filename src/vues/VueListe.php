@@ -77,7 +77,6 @@ END;
             $attributs=$value->getAttributes();
             $pseudoid = $attributs['pseudo_id'];
             $pseudo = User::where('id','=',$pseudoid)->first()->pseudo;
-            echo "pseudo : ".$pseudo;
             $liste_messages .= "<div>".$pseudo.' : "'.$attributs['message'].'"'."</div>";
         }
         if($n === 0){
@@ -92,19 +91,28 @@ END;
         </div>
         <hr>";
         $res .= $liste_messages;
-        $message = '
-                        <form action="$host/projetphp/connexion" method="POST">
+        $host = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'];
+        $list_id = $this->model->no;
+        $path = $this->rq->getUri()->getBasePath();
+        $placeholder = "";
+        if(isset($_SESSION['user'])){
+            $placeholder = "Rédigez votre message ici";
+        }
+        $message = <<<HTML
+                        <form action="$path/liste/$list_id" method="POST">
                             <div class="row">
                                 <div class="col">
                                     <label for="nomListe">Publier un message</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" name="message" placeholder='$placeholder' id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
                                 <hr>
                                 <button class="btn btn-primary" type="submit">Publier</button>
                             </div>
                         </form>
-                    ' ;
-        $res .= $message;
+                    HTML;
+        if(isset($_SESSION['user'])){
+            $res .= $message;
+        }
         $res .= "</div>";
 
         return $res;
