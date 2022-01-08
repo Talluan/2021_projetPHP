@@ -19,16 +19,19 @@ class VueAjouterItem
 
     public function ajouterItem()
     {
+        $uri = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $host = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']; // TEST NE PAS LAISSER
         $res = <<<END
 
         <div class="container">
-        <form method="post" enctype="multipart/form-data">
+        <form action="$uri" method="post" enctype="multipart/form-data">
     <!-- upload of a single file -->
     <p>
         <label>Image : </label><br/>
         <input type="file" name="image"/><br>
         <input required type="text" name="nom" placeholder="nom item.."/><br>
         <input type="number" name="prix" placeholder="prix item.."/><br>
+        <input type="text" name="url" placeholder="url item.."/><br>
         <textarea required name="description" placeholder="description.."></textarea>
     </p>
     <p>

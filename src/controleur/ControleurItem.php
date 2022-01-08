@@ -26,13 +26,32 @@ class ControleurItem{
             $rs->getBody()->write("Vous n'avez pas acces a cette page");
             return $rs;
         }
+        $parsed = $rq->getParsedBody();
+        $nom = filter_var($parsed['nom'], FILTER_SANITIZE_STRING);
+        $descr = filter_var($parsed['description'], FILTER_SANITIZE_STRING);
+        $prix = filter_var($parsed['prix'], FILTER_SANITIZE_STRING);
+        $url = filter_var($parsed['url'], FILTER_SANITIZE_STRING);
         $item = new Item();
         $item->liste_id = $_SESSION['id_liste'];
-        $item->nom = $rq->nom;
-        $item->descr = $rq->description;
-        $item->img = $rq->img;
-        $item->url = $rq->url;
-        $item->tarif = $rq->tarif;
+        $item->nom = $nom;
+        $item->descr = $descr;
+
+        $uploadedFiles = $rq->getUploadedFiles();
+
+        // handle single input with single file upload
+        $uploadedFile = $uploadedFiles['image'];
+
+        $hash = hash_file('md5',$uploadedFile->file);
+
+        $res=explode('.',$uploadedFile->getClientFilename());
+        $extension = end($res);
+        
+        $nomfichier = $hash.".".$extension;
+        $uploadedFile->moveTo(__DIR__ . '/../../img/' . $nomfichier);
+
+        $item->img = $nomfichier;
+        $item->url = $url;
+        $item->tarif = $prix;
         $item->save();
     }
 
