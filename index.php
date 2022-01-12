@@ -126,6 +126,20 @@ $app->get(
         return $c->ajouterItem($rq, $rs,$args);
     }
 );
+$app->post(
+    '/ajouterDateExpiration',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->ajouterDateExpiration($rq, $rs,$args);
+    }
+);
+$app->get(
+    '/ajouterDateExpiration',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->ajouterDateExpiration($rq, $rs,$args);
+    }
+);
 $app->run();
 
 

@@ -9,6 +9,7 @@ use wish\vues\VueListe;
 use wish\vues\VueListes;
 use wish\vues\VueMesListes;
 use wish\vues\VueCreerListe;
+use wish\vues\VueDateExpiration;
 
 class ControleurListe {
 
@@ -52,7 +53,6 @@ class ControleurListe {
                 $track_user_code = $_COOKIE[ 'WishListe2021AuChocolat' ];
                 $listes = Liste::all();
                 $items = Item::all();
-
                 $vueListes = new VueMesListes($listes,$rq,$items,$track_user_code);
                 $rs->getBody()->write($vueListes->render());
                 return $rs;
@@ -102,5 +102,25 @@ class ControleurListe {
         $vueCreer = new VueCreerListe($rq, $rq);
         $rs->getBody()->write($vueCreer->render());
         return $rs;
+    }
+
+    function ajouterDateExpiration($rq,$rs,$args){
+        if($rq->isPost()){
+            if(!Authentication::isConnected()) return;
+            $num = $_SESSION['id_liste'];
+            $l = Liste::find($num);
+            $parsed = $rq->getParsedBody();
+            $date = filter_var($parsed['date'], FILTER_SANITIZE_STRING);
+
+            if($l->user_id == $_SESSION['user']['id']){
+                $l->expiration = $date;
+                $l->save();
+            }
+            echo $date;
+        }else{
+            $vueDate = new VueDateExpiration($rq,$rq);
+            $rs->getBody()->write($vueDate->render());
+            return $rs;
+        }
     }
 }

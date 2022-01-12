@@ -58,7 +58,8 @@ END;
         }
         $res .= "</div><br>";
         $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
-        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a><a class='btn btn-info'>Partager la liste</a>";
+        $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
+        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'>Partager la liste</a>";
         $liste_messages = 
         "</div>
             <hr>
