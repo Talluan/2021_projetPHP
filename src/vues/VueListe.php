@@ -100,7 +100,6 @@ END;
         }
         $message = <<<HTML
                         <form action="$path/liste/$list_id" method="POST">
-                        <div class='container'>
                             <div class="row">
                                 <div class="col">
                                     <label for="nomListe">Publier un message</label>
