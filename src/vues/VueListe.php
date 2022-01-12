@@ -23,7 +23,12 @@ class VueListe
 
     public function htmlListe(){
         $res ="";
-        
+        $proprio = false;
+        if(isset($_SESSION['user']['id'])){
+            if($_SESSION['user']['id'] == $this->model->getAttributes()['user_id']){
+                $proprio = true;
+            }
+        }
         $res.='
         <div class="container">
         <div class="row">
@@ -32,8 +37,8 @@ class VueListe
             $attributs=$value->getAttributes();
             $nom=$attributs['nom'];
             $img=$this->rq->getUri()->getBasePath()."/img/".$attributs['img'];
-            $voir=$this->rq->getUri()->getBasePath()."\/item/".$attributs['id'];
-            $html=<<<END
+            $voir=$this->rq->getUri()->getBasePath()."/item/".$attributs['id'];
+            $html =<<<END
             <div class="col-sm-3">
 					<div class="membre-corps">
 						<div>
@@ -41,11 +46,15 @@ class VueListe
 							<br><img src="$img" alt="" width="100" height="100"> 
 						</div>
 						<div class="mambre-btn">
-							<a href="$voir" class='btn btn-primary'>Voir</a>
+						 	<a href="$voir" class='btn btn-primary'>Voir</a>
 						</div>
-					</div>
-				</div>
 END;
+            if($proprio){
+                $html .= '<div class="mambre-btn">
+                                <a href="'.$voir.'" class="btn btn-primary">Supprimer</a>
+                            </div>';
+            }
+            $html .= '</div></div>';
 			// $res .= '<div class="col-sm-3">';
 			// $res .= '<div class="membre-corps">';
 			// $res .= $attributs['nom'];
@@ -53,7 +62,7 @@ END;
 			// $res .= '<div class="btn btn-primary">';
 			// $res .= "<a class='btn btn-primary' href=".$this->rq->getUri()->getBasePath()."\/item/".$attributs['id'].">Voir</a>";
             // $res .= '</div> </div> </div> </div> </div>';
-        $res.=$html;
+            $res.=$html;
 
         }
         $res .= "</div><br>";
