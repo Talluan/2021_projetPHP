@@ -109,7 +109,7 @@ END;
                                 <button class="btn btn-primary" type="submit">Publier</button>
                             </div>
                         </form>
-                    HTML;
+HTML;
         if(isset($_SESSION['user'])){
             $res .= $message;
         }
