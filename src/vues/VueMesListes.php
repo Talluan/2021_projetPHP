@@ -52,7 +52,7 @@ END;
                 }
             }
         } else {
-            if($attributListe['cookieUser'] == $this->id){
+            if(isset( $attributListe['cookieUser']) && $attributListe['cookieUser'] == $this->id){
                 $titre = $attributListe['titre'];
                 $msg = $attributListe['description'] . " | " . $attributListe['expiration'];
                 $res .= <<<END
