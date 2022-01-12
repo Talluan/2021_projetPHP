@@ -4,6 +4,7 @@ namespace wish\controleur;
 
 use wish\models\Item;
 use wish\models\Liste;
+use wish\vues\VueConnexion;
 use wish\vues\VueListe;
 use wish\vues\VueListes;
 use wish\vues\VueMesListes;
@@ -51,11 +52,17 @@ class ControleurListe {
                 $track_user_code = $_COOKIE[ 'WishListe2021AuChocolat' ];
                 $listes = Liste::all();
                 $items = Item::all();
+
                 $vueListes = new VueMesListes($listes,$rq,$items,$track_user_code);
                 $rs->getBody()->write($vueListes->render());
                 return $rs;
-                } 
+            } else {
+                //cas ou pas de connexion et pas de cookie
+                $vueListes = new VueConnexion($rq);
+                $rs->getBody()->write($vueListes->render());
+                return $rs;
             }
+        }
     }
 
     /**
