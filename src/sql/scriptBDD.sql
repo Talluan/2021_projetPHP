@@ -31,8 +31,7 @@ CREATE TABLE `item` (
   `descr` text,
   `img` text,
   `url` text,
-  `tarif` decimal(5,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `tarif` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `liste`;
