@@ -10,6 +10,7 @@ use wish\vues\VueListes;
 use wish\vues\VueMesListes;
 use wish\vues\VueCreerListe;
 use wish\vues\VueDateExpiration;
+use wish\models\User;
 
 class ControleurListe {
 
@@ -20,10 +21,52 @@ class ControleurListe {
     function getAllItems($rq, $rs,$args){
         $num = $args['id'];
         $_SESSION['id_liste'] = $args['id'];
-        $l = Liste::find($num);
-        
-        $vueListe = new VueListe($l,$rq);
-        $rs->getBody()->write($vueListe->render());
+        if (Authentication::isConnected()) {
+            $users = User::all();
+            foreach ($users as $user) {
+                $attributUser = $user->getAttributes();
+                if ($attributUser['id'] ==  $_SESSION['user']['id']) {   
+                    if($attributUser['roleid'] >= 3 ){
+                        $etat = "Admin";
+
+                        $l = Liste::find($num);
+                        $vueListe = new VueListe($l,$rq,$etat);
+                    $rs->getBody()->write($vueListe->render());
+                    } else {
+                        if($num>10000){
+                            $liste = Liste::all();
+                foreach ($liste as $list) {
+                $attributListe = $list->getAttributes();
+                $l = Liste::find($attributListe['no']);
+                $temp = "/projetphp/liste/";
+                 if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                    $test = "Edition";
+                    $vueListe = new VueListe($l,$rq,$test);
+                    $rs->getBody()->write($vueListe->render());
+                 }
+                 if ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                    $test = "Vue";
+                    $vueListe = new VueListe($l,$rq,$test);
+                    $rs->getBody()->write($vueListe->render());
+                }
+                if ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                    $test = "Surprise";
+                    $vueListe = new VueListe($l,$rq,$test);
+                    $rs->getBody()->write($vueListe->render());
+                }
+
+                }
+                        } else {
+                            $l = Liste::find($num);
+                            $vueListe = new VueListe($l,$rq,"Pas Accès");
+                    $rs->getBody()->write($vueListe->render());
+                        }
+                        
+                    }   
+            }    
+        }   
+    }
+    
         return $rs;
     }
 
@@ -77,10 +120,14 @@ class ControleurListe {
         $liste = new Liste();
         $liste->titre = $nom;
         $liste->description = $descr;
+        $liste->tokenEdition = random_int(10000,intval(9999999999));
+        $liste->tokenPartage = random_int(10000,intval(9999999999));
+        $liste->tokenSurprise = random_int(10000,intval(9999999999));
         if(Authentication::isConnected()){
             $liste->user_id = $_SESSION['user']['id'];
         } else {
             {
+                //création d'un cookie durant 1mois (qui permet de stocker les lists mêmes si l'utilisateur n'est pas connecter)
                 $nomCookie = 'WishListe2021AuChocolat';
                 $valCookie = random_int(intval(-99999999999),-2);
                 setcookie($nomCookie, $valCookie, time() + 60*60*24*30);

@@ -126,6 +126,7 @@ $app->get(
         return $c->ajouterItem($rq, $rs,$args);
     }
 );
+
 $app->post(
     '/ajouterDateExpiration',
     function ($rq, $rs, $args) {
@@ -140,6 +141,7 @@ $app->get(
         return $c->ajouterDateExpiration($rq, $rs,$args);
     }
 );
+
 $app->run();
 
 

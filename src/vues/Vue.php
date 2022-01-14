@@ -32,9 +32,6 @@ class Vue
             <a class="nav-link" href="$path/creerliste">Creer votre liste</a>
         </li>
         <li class="nav-item d-flex">
-                    <a class="nav-link" href="$path/meslistes">Mes Listes</a>
-                </li>
-        <li class="nav-item d-flex">
         <a class="nav-link" href="$path/connexion">Connexion</a>
         </li>
     </ul>

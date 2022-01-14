@@ -1,17 +1,21 @@
 <?php
 
 namespace wish\vues;
+use wish\models\User;
 
-use wish\models\User as User;
+//use wish\models\User as User;
 
 class VueListe
 {
     private $model;
     private $rq;
-    function __construct($liste,$rq)
+    private $etat;
+    
+    function __construct($liste,$rq,$e)
     {
         $this->model = $liste;
         $this->rq = $rq;
+        $this->etat = $e;
     }
 
     public function render()
@@ -21,18 +25,45 @@ class VueListe
         return $html->getHtml();
     }
 
-    public function htmlListe(){
-        $res ="";
-        $proprio = false;
-        if(isset($_SESSION['user']['id'])){
-            if($_SESSION['user']['id'] == $this->model->getAttributes()['user_id']){
-                $proprio = true;
-            }
+    public function htmlListe()
+    {
+       
+        return $this->vueAdmin();
+}
+
+        //point de vue d'un utilisateur connecté qui peut intérageur avec la liste !
+        
+        private function vueEdition(){
+
         }
-        $res.='
-        <div class="container">
-        <div class="row">
-        ';
+
+        //point de vue normal (pas besoin d'être connnécté), mais ne peut pas intéragire avec la liste (ne peut pas réserver un item, laisser de message, etc...)
+        private function vue(){
+
+        }
+
+        //point de vue de celui qui recoit tous les cadeaux (il faut mettre un timer tant que la date n'est pas la bonne)
+        private function vueSurprise(){
+            
+        }
+        
+        //point de vue d'un admin sur les liste <10000
+        //si id > 10000 c'est un token accesible par tous et pas seulement un admin
+        private function vueAdmin(){
+            $proprio = false;
+            if(isset($_SESSION['user']['id'])){
+                if($_SESSION['user']['id'] == $this->model->getAttributes()['user_id']){
+                    $proprio = true;
+                }         
+            }
+
+            $res ="";
+        
+                    $res.='
+                    <div class="container">
+                    <div class="row">
+                    ';
+
         foreach ($this->model->items as $value) {
             $attributs=$value->getAttributes();
             $nom=$attributs['nom'];
@@ -76,8 +107,11 @@ END;
                 <div class='row'>
                     <div class='col-sm-3'>
                         <div class='membre-corps'>
+                        <div>
+                                <h3>Mode : $this->etat</h3>
+                            </div>
                             <div>
-                                <h3>Messages</h3>
+                                <h3>Message</h3>
                             </div>
                             <div class='row'>";
         //recherche des messages de la liste
@@ -128,4 +162,7 @@ HTML;
 
         return $res;
     }
+    
+
+
 }
