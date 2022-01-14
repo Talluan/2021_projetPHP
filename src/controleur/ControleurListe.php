@@ -63,6 +63,19 @@ class ControleurListe {
                         }
                         
                     }   
+
+                    $proprio = false;
+                    if(isset($_SESSION['user']['id'])){
+                        $l = Liste::find($num);
+                        if($_SESSION['user']['id'] == $l->getAttributes()['user_id']){
+                            $proprio = true;
+                        }         
+                    }
+                    if ($proprio){
+                        $test = "Proprio";
+                        $vueListe = new VueListe($l,$rq,$test);
+                        $rs->getBody()->write($vueListe->render());
+                    }
             }    
         }   
     }
