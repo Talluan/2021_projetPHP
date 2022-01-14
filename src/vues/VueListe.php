@@ -27,24 +27,39 @@ class VueListe
 
     public function htmlListe()
     {
-       
+        if($this->etat == "Admin")
         return $this->vueAdmin();
+        if($this->etat == "Edition")
+        return $this->vueEdition();
+        if($this->etat == "VuePartage")
+        return $this->vuePartage();
+        if($this->etat == "Interdit")
+        return $this->vueInterdit();
+        if($this->etat == "Surprise")
+        return $this->vueSurprise();
 }
 
+        // si l'utilisateur n'es pas sensé avoir accès à la liste !
+        private function vueInterdit(){
+            $res ="<p> Vous n'avez pas accès à ceci ! </p>";
+            return $res;
+        }          
         //point de vue d'un utilisateur connecté qui peut intérageur avec la liste !
-        
         private function vueEdition(){
-
+            $res ="<p> vue Edition </p>";
+            return $res;
         }
 
         //point de vue normal (pas besoin d'être connnécté), mais ne peut pas intéragire avec la liste (ne peut pas réserver un item, laisser de message, etc...)
-        private function vue(){
-
+        private function vuePartage(){
+            $res ="<p> vue Partage </p>";
+            return $res;
         }
 
         //point de vue de celui qui recoit tous les cadeaux (il faut mettre un timer tant que la date n'est pas la bonne)
         private function vueSurprise(){
-            
+            $res ="<p> vue Surprise </p>";
+            return $res;
         }
         
         //point de vue d'un admin sur les liste <10000

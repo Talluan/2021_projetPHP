@@ -45,7 +45,7 @@ class ControleurListe {
                     $rs->getBody()->write($vueListe->render());
                  }
                  if ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                    $test = "Vue";
+                    $test = "VuePartage";
                     $vueListe = new VueListe($l,$rq,$test);
                     $rs->getBody()->write($vueListe->render());
                 }
@@ -58,7 +58,7 @@ class ControleurListe {
                 }
                         } else {
                             $l = Liste::find($num);
-                            $vueListe = new VueListe($l,$rq,"Pas Accès");
+                            $vueListe = new VueListe($l,$rq,"Interdit");
                     $rs->getBody()->write($vueListe->render());
                         }
                         
