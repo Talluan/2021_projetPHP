@@ -20,66 +20,92 @@ class ControleurListe {
      */
     function getAllItems($rq, $rs,$args){
         $num = $args['id'];
-        $_SESSION['id_liste'] = $args['id'];
-        if (Authentication::isConnected()) {
-            $users = User::all();
-            foreach ($users as $user) {
-                $attributUser = $user->getAttributes();
-                if ($attributUser['id'] ==  $_SESSION['user']['id']) {   
-                    if($attributUser['roleid'] >= 3 ){
-                        $etat = "Admin";
-
-                        $l = Liste::find($num);
-                        $vueListe = new VueListe($l,$rq,$etat);
-                    $rs->getBody()->write($vueListe->render());
-                    } else {
-                        if($num>10000){
-                            $liste = Liste::all();
-                foreach ($liste as $list) {
-                $attributListe = $list->getAttributes();
-                $l = Liste::find($attributListe['no']);
-                $temp = "/projetphp/liste/";
-                 if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                    $test = "Edition";
-                    $vueListe = new VueListe($l,$rq,$test);
-                    $rs->getBody()->write($vueListe->render());
-                 }
-                 if ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                    $test = "VuePartage";
-                    $vueListe = new VueListe($l,$rq,$test);
-                    $rs->getBody()->write($vueListe->render());
-                }
-                if ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                    $test = "Surprise";
-                    $vueListe = new VueListe($l,$rq,$test);
-                    $rs->getBody()->write($vueListe->render());
-                }
-
-                }
-                        } else {
-                            $l = Liste::find($num);
-                            $vueListe = new VueListe($l,$rq,"Interdit");
-                    $rs->getBody()->write($vueListe->render());
-                        }
-                        
-                    }   
-
-                    $proprio = false;
+        if (Authentication::isConnected()) { //si l'utilisateur est connecter
+            $proprio = false;
                     if(isset($_SESSION['user']['id'])){
                         $l = Liste::find($num);
-                        if($_SESSION['user']['id'] == $l->getAttributes()['user_id']){
-                            $proprio = true;
-                        }         
+                        if($l != null){ 
+                            $attributListe = $l->getAttributes();
+                            if($_SESSION['user']['id'] == $attributListe['user_id']){
+                                $proprio = true;
+                            }  
+                        }            
                     }
-                    if ($proprio){
-                        $test = "Proprio";
-                        $vueListe = new VueListe($l,$rq,$test);
+                    if ($proprio){ //si l'utilisateur est le propriétaire de la liste
+                        $etat = "Proprio";
+                        $vueListe = new VueListe($l,$rq,$etat);
+                        $rs->getBody()->write($vueListe->render());
+                    } else { //si l'utilisateur n'est pas le propriétaire de la liste
+                        $users = User::all();
+                        foreach ($users as $user){
+                            $attributUser = $user->getAttributes();
+                            if ($attributUser['id'] ==  $_SESSION['user']['id']){
+                                if($attributUser['roleid'] >= 3 ){ //si l'utilisateur est admin
+                                    $etat = "Admin";
+                                    $l = Liste::find($num);
+                                    $vueListe = new VueListe($l,$rq,$etat);
+                                    $rs->getBody()->write($vueListe->render());
+                                } else { //si l'utilisateur n'est pas admin
+                                    if($num<10000){ //si il s'agit d'un ID de liste 
+                                        $l = Liste::find($num);
+                                        $vueListe = new VueListe($l,$rq,"Interdit");
+                                        $rs->getBody()->write($vueListe->render());
+                                    } else { //si il s'agit d'un Token de liste
+                                        $liste = Liste::all();
+                                        foreach ($liste as $list){
+                                            $attributListe = $list->getAttributes();
+                                            $l = Liste::find($attributListe['no']);
+                                            $temp = "/projetphp/liste/";
+                                            if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                                                $etat = "Edition";
+                                                $vueListe = new VueListe($l,$rq,$etat);
+                                                $rs->getBody()->write($vueListe->render());
+                                             }
+                                             if ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                                                $etat = "VuePartage";
+                                                $vueListe = new VueListe($l,$rq,$etat);
+                                                $rs->getBody()->write($vueListe->render());
+                                            }
+                                            if ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                                                $etat = "Surprise";
+                                                $vueListe = new VueListe($l,$rq,$etat);
+                                                $rs->getBody()->write($vueListe->render());
+                                            }
+                                        }
+                                    }
+                                }
+                            }       
+                        }
+                    }
+        } else { //si l'utilisateur n'est pas connecter
+            if($num<10000){ //si il s'agit d'un ID de liste 
+                $l = Liste::find($num);
+                $vueListe = new VueListe($l,$rq,"Interdit");
+                $rs->getBody()->write($vueListe->render());
+            } else { //si il s'agit d'un Token de liste
+                $liste = Liste::all();
+                foreach ($liste as $list){
+                    $attributListe = $list->getAttributes();
+                    $l = Liste::find($attributListe['no']);
+                    $temp = "/projetphp/liste/";
+                    if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                        $etat = "EditionPasConnecter";
+                        $vueListe = new VueListe($l,$rq,$etat);
+                        $rs->getBody()->write($vueListe->render());
+                     }
+                     if ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                        $etat = "VuePartage";
+                        $vueListe = new VueListe($l,$rq,$etat);
                         $rs->getBody()->write($vueListe->render());
                     }
-            }    
-        }   
-    }
-    
+                    if ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                        $etat = "Surprise";
+                        $vueListe = new VueListe($l,$rq,$etat);
+                        $rs->getBody()->write($vueListe->render());
+                    }
+                }
+            }
+        }
         return $rs;
     }
 

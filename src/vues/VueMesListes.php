@@ -32,9 +32,10 @@ class VueMesListes
             $titre = $attributListe['titre'];
             $msg = $attributListe['description'] . " | " . $attributListe['expiration'];
             $res .= <<<END
-            <ul class="list-unstyled">
-            <li class="media">
-END; 
+                <ul class="list-unstyled">
+                <li class="media">
+END;
+            
 
             $sourceliste = $this->rq->getUri()->getBasePath()."/liste/".$attributListe['no'];
 

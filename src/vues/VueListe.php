@@ -31,6 +31,8 @@ class VueListe
         return $this->vueAdmin();
         if($this->etat == "Edition")
         return $this->vueEdition();
+        if($this->etat == "EditionPasConnecter")
+        return $this->vueEditionPasConnecter();
         if($this->etat == "VuePartage")
         return $this->vuePartage();
         if($this->etat == "Interdit")
@@ -38,14 +40,21 @@ class VueListe
         if($this->etat == "Surprise")
         return $this->vueSurprise();
         if($this->etat == "Proprio")
-        return $this->vueSurprise();
+        return $this->vueProprio();
 }
 
         // si l'utilisateur n'es pas sensé avoir accès à la liste !
         private function vueInterdit(){
             $res ="<p> Vous n'avez pas accès à ceci ! </p>";
             return $res;
-        }          
+        }    
+        
+        // si l'utilisateur n'est pas connecter mais qu'il est sur un TokenEdition
+        private function vueEditionPasConnecter(){
+            $res ="<p> Vous ne pouvez pas faire de modification car vous n'êtes pas connecter ! </p>";
+            return $res;
+        }     
+
         //point de vue d'un utilisateur connecté qui peut intérageur avec la liste !
         private function vueEdition(){
             $res ="<p> vue Edition </p>";
