@@ -20,15 +20,21 @@ class VueCreerListe
 
     public function creerListe()
     {
-        $host = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'];
+        $host = $this->rq->getUri()->getBasePath();
         $res = <<<END
 
         <div class="container">
-        <form action="$host/projetphp/creerliste" method="POST">
+        <form action="$host/creerliste" method="POST">
         <div class="row">
           <div class="col">
-          <label for="nomListe">Nom de la liste</label>
-          <input id="nomListe" type="text" name="nom" class="form-control" placeholder="Nom Liste">
+            <div class="row">
+                <label for="nomListe">Nom de la liste</label>
+                <input id="nomListe" type="text" name="nom" class="form-control" placeholder="Nom Liste">
+            </div>
+            <div class="row">
+                <label for="dateExpi">Date d'expiration de la liste</label>
+                <input id="dateExpi" type="date" name="date" class="form-control" placeholder=Date d'expiration de la liste">
+            </div>
           </div>
           <div class="col">
           <div class="form-group">

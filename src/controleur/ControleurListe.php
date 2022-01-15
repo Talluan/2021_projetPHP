@@ -255,8 +255,10 @@ class ControleurListe {
         $parsed = $rq->getParsedBody();
         $nom = filter_var($parsed['nom'], FILTER_SANITIZE_STRING);
         $descr = filter_var($parsed['descr'], FILTER_SANITIZE_STRING);
+        $date = filter_var($parsed['date'], FILTER_SANITIZE_STRING);
         $liste = new Liste();
         $liste->titre = $nom;
+        $liste->expiration = $date;
         $liste->description = $descr;
         $liste->tokenEdition = random_int(10000,intval(9999999999));
         $liste->tokenPartage = random_int(10000,intval(9999999999));
