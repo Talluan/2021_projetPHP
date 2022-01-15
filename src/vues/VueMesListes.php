@@ -63,9 +63,10 @@ END;
                 <ul class="list-unstyled">
                 <li class="media">
 END;
+                $sourceliste = $this->rq->getUri()->getBasePath()."/liste/".$attributListe['no'];
                 $res .= <<<END
                 <div class="media-body">
-                    <h5 class="mt-0 mb-1">$titre</h5>
+                <a class="link-dark"    href="$sourceliste"><h5 class="mt-0 mb-1">$titre</h5></a>
                     $msg
                   </div>  
 END;
