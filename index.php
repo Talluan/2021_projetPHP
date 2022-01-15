@@ -142,6 +142,14 @@ $app->get(
     }
 );
 
+$app->get(
+    '/item/{id}/reserver',
+    function ($rq, $rs, $args) {
+        $c = new ControleurItem;
+        return $c->reserverItem($rq,$rs,$args);
+    }
+);
+
 $app->run();
 
 

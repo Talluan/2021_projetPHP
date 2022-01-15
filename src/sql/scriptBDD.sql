@@ -34,6 +34,16 @@ CREATE TABLE `item` (
   `tarif` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE `reservation` (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) DEFAULT NULL,
+  item_id int(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (item_id) REFERENCES item(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 DROP TABLE IF EXISTS `liste`;
 CREATE TABLE `liste` (
   `no` int(11) NOT NULL AUTO_INCREMENT,
@@ -41,6 +51,7 @@ CREATE TABLE `liste` (
   `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `expiration` date DEFAULT NULL,
+  `public` boolean DEFAULT FALSE,
   `tokenEdition` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tokenPartage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tokenSurprise` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -94,9 +105,9 @@ INSERT INTO `item` (`id`, `liste_id`, `nom`, `descr`, `img`, `url`, `tarif`) VAL
 (27,	1,	'Fort Aventure',	'Découvrez Fort Aventure à Bainville-sur-Madon, un site Accropierre unique en Lorraine ! Des Parcours Acrobatiques pour petits et grands, Jeu Mission Aventure, Crypte de Crapahute, Tyrolienne, Saut à l\'élastique inversé, Toboggan géant... et bien plus encore.',	'fort.jpg',	'',	25.00);
 
 
-INSERT INTO `liste` (`no`, `user_id`, `titre`, `description`, `expiration`, `tokenEdition`) VALUES
-(1,	1,	'Pour fêter le bac !',	'Pour un week-end à Nancy qui nous fera oublier les épreuves. ',	'2018-06-27',	'nosecure1'),
-(2,	2,	'Liste de mariage d\'Alice et Bob',	'Nous souhaitons passer un week-end royal à Nancy pour notre lune de miel :)',	'2018-06-30',	'nosecure2'),
-(3,	3,	'C\'est l\'anniversaire de Charlie',	'Pour lui préparer une fête dont il se souviendra :)',	'2017-12-12',	'nosecure3');
+INSERT INTO `liste` (`no`, `user_id`, `titre`, `description`, `expiration`,`public`, `tokenEdition`, `tokenPartage`, `tokenSurprise`) VALUES
+(1,	1,	'Pour fêter le bac !',	'Pour un week-end à Nancy qui nous fera oublier les épreuves. ',	'2018-06-27',TRUE, 10001, 10004, 10007),
+(2,	2,	'Liste de mariage d\'Alice et Bob',	'Nous souhaitons passer un week-end royal à Nancy pour notre lune de miel :)',	'2018-06-30',TRUE, 10002, 10005, 10008),
+(3,	3,	'C\'est l\'anniversaire de Charlie',	'Pour lui préparer une fête dont il se souviendra :)',	'2017-12-12',TRUE,	10003, 10006, 10009);
 
 
