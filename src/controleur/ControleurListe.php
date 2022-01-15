@@ -320,25 +320,25 @@ class ControleurListe {
             return $rs;
         }
     }
-    /**
-     * méthode qui prepare la suppression d'un item de sa liste
-     */
-
-     function traiterItem($rq, $rs, $args) {
-        if (!isset($_SESSION['id_liste'])) {
-            $rs->getBody()->write("Vous n'avez pas acces a cette page");
-            return $rs;
-        }
-        $id_item = $args['idItem'];
-        $item = Item::find($id_item);
-        
-     }
 
     function supprimerItem($rq, $rs, $args) {
         if (!Authentication::isconnected()) {
             $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
             return $rs;
         }
+        $vuesupprimeritem = new VueSupprimerItem($rq,$rs,$args);
+        $rs->getBody()->write($vuesupprimeritem->render());
         return $rs;
+    }
+
+    function traiterItem($rq, $rs, $args) {
+        if (!isset($_SESSION['id_liste'])) {
+            $rs->getBody()->write("Vous n'avez pas acces a cette page");
+            return $rs;
+        }
+        $item = Item::find($args['id']);
+        $item->delete();
+        echo "suppression";
+        return $rs->withRedirect( $rq->getUri()->getBasePath() . "/liste/" .$args['idliste']);
     }
 }
