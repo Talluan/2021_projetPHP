@@ -24,9 +24,9 @@ class ControleurMessage {
         if($message->message != ""){
             $message->save();
         }
-        $path = $rq->getUri()->getBasePath();
-        header('Location: '.$path."/liste/".$args['id']);
-        exit;
+        $path = $rq->getUri()->getBasePath() . "/liste/" .$args['id'];
+        $rs = $rs->withRedirect($path);
+        return $rs;
     }
 
 }

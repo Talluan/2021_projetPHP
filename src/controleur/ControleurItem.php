@@ -96,7 +96,10 @@ class ControleurItem
         $reserv->item_id = $item->id;
         $reserv->user_id = $_SESSION['user']['id'];
         $reserv->save();
-        return ControleurItem::getItem($rq, $rs, $args);
+        // On redirige l'utilisateur vers la page de l'item
+        $path = $rq->getUri()->getBasePath() . "/item/$id_item";
+        $rs = $rs->withRedirect($path);
+        return $rs;
 
     }
 }
