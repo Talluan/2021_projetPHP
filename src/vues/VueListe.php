@@ -82,7 +82,9 @@ END;
 $res .= "</div><br>";
 $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
 $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
-$res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'>Partager la liste</a>";
+$partage = $this->rq->getUri()->getBasePath()."/partageListe/";
+$partage .= $_SESSION['id_liste'];
+$res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info' href='$partage'>Partager la liste</a>";
 $liste_messages = 
 "</div>
     <hr>
@@ -179,7 +181,9 @@ END;
         $res .= "</div><br>";
         $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
- $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'>Partager la liste</a>";
+        $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
+        $partage .= $_SESSION['id_liste'];
+ $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info' href ='$partage'>Partager la liste</a>";
         $liste_messages = 
         "</div>
             <hr>
@@ -277,7 +281,9 @@ END;
         $res .= "</div><br>";
         $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
-        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'>Partager la liste</a>";
+        $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
+        $partage .= $_SESSION['id_liste'];
+        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info' href ='$partage'>Partager la liste</a>";
         $liste_messages = 
         "</div>
             <hr>
@@ -482,7 +488,9 @@ END;
         $res .= "</div><br>";
         $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
-        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'>Partager la liste</a>";
+        $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
+        $partage .= $_SESSION['id_liste'];
+        $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'  href='$partage'>Partager la liste</a>";
         $liste_messages = 
         "</div>
             <hr>

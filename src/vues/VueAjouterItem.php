@@ -20,7 +20,6 @@ class VueAjouterItem
     public function ajouterItem()
     {
         $uri = $this->rq->getUri()->getBasePath()."/ajouteritem";
-       // $host = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']; // TEST NE PAS LAISSER
         $res = <<<END
 
         <div class="container">

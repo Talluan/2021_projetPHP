@@ -12,6 +12,7 @@ use wish\vues\VueCreerListe;
 use wish\vues\VueDateExpiration;
 use wish\models\User;
 use wish\vues\VueSupprimerItem;
+use wish\vues\VuePartage;
 
 class ControleurListe {
 
@@ -340,5 +341,34 @@ class ControleurListe {
         $item->delete();
         echo "suppression";
         return $rs->withRedirect( $rq->getUri()->getBasePath() . "/liste/" .$args['idliste']);
+    }
+
+    function partageListe($rq, $rs, $args) {
+        $num = $args['id'];
+        if (!Authentication::isconnected()) {
+            $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
+            return $rs;
+        }
+        $liste = Liste::all();
+        $temp = "/projetphp/partageListe/";
+        foreach ($liste as $list){
+            $attributListe = $list->getAttributes();
+             if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                $vuePartage = new VuePartage($rq,$rs,$args,$num,"Edition");
+                $rs->getBody()->write($vuePartage->render());
+            } 
+            if ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                $vuePartage = new VuePartage($rq,$rs,$args,$num,"Partage");
+                $rs->getBody()->write($vuePartage->render());
+            } 
+            if ($temp.$attributListe['no'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                $vuePartage = new VuePartage($rq,$rs,$args,$num,"Admin");
+                $rs->getBody()->write($vuePartage->render());
+            } 
+        }
+             
+        return $rs;
+            
+        
     }
 }

@@ -174,6 +174,14 @@ $app->get(
     }
 );
 
+$app->get(
+    '/partageListe/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->partageListe($rq, $rs,$args);
+    }
+);
+
 $app->run();
 
 
