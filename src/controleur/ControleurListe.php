@@ -20,6 +20,7 @@ class ControleurListe {
      */
     function getAllItems($rq, $rs,$args){
         $num = $args['id'];
+        $_SESSION['id_liste'] = $args['id'];
         $proprio = false;
         $temp = "/projetphp/liste/";
         if (Authentication::isConnected()) { //si l'utilisateur est connecter
@@ -79,7 +80,6 @@ class ControleurListe {
                                                                 if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                                                     if($attributListe['user_id'] == $attributUser['id']){
                                                                         $etat = "Proprio";
-                                                                        //$l = Liste::find($attributListe['']);
                                                                         $vueListe = new VueListe($l,$rq,$etat);
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
@@ -87,7 +87,6 @@ class ControleurListe {
                                                                  elseif ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                                                     if($attributListe['user_id'] == $attributUser['id']){
                                                                         $etat = "Proprio";
-                                                                        //$l = Liste::find($attributListe['']);
                                                                         $vueListe = new VueListe($l,$rq,$etat);
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
@@ -297,9 +296,19 @@ class ControleurListe {
             $parsed = $rq->getParsedBody();
             $date = filter_var($parsed['date'], FILTER_SANITIZE_STRING);
 
-            if($l->user_id == $_SESSION['user']['id']){
-                $l->expiration = $date;
-                $l->save();
+            $liste = Liste::all();
+            $temp = "/projetphp/liste/";
+                foreach ($liste as $list){
+                    $attributListe = $list->getAttributes();
+                    if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                        if($l->user_id == $_SESSION['user']['id']){
+                            $l->expiration = $date;
+                            $l->save();              
+                    }
+                                          
+                }
+
+            
             }
             echo $date;
         }else{
