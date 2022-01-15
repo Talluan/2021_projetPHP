@@ -29,7 +29,7 @@ class VueListes
             if($attributListe['public'] == TRUE){
                 $titre = $attributListe['titre'];
                 $msg = $attributListe['description'] . " | " . $attributListe['expiration'];
-                $listepath = $this->rq->getUri()->getBasePath() . "/liste/" . $attributListe['no'];
+                $listepath = $this->rq->getUri()->getBasePath() . "/liste/" . $attributListe['tokenEdition'];
                 $res .= <<<END
                 <ul class="list-unstyled">
                 <li class="media">
