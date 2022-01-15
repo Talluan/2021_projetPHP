@@ -11,6 +11,7 @@ use wish\vues\VueMesListes;
 use wish\vues\VueCreerListe;
 use wish\vues\VueDateExpiration;
 use wish\models\User;
+use wish\vues\VueSupprimerItem;
 
 class ControleurListe {
 
@@ -166,7 +167,7 @@ class ControleurListe {
             $liste->user_id = $_SESSION['user']['id'];
         } else {
             {
-                //création d'un cookie durant 1mois (qui permet de stocker les lists mêmes si l'utilisateur n'est pas connecter)
+                //création d'un cookie durant 1mois (qui permet de stocker les lists mêmes si l'utilisateur n'est pas connecte)
                 $nomCookie = 'WishListe2021AuChocolat';
                 $valCookie = random_int(intval(-99999999999),-2);
                 setcookie($nomCookie, $valCookie, time() + 60*60*24*30);
@@ -208,5 +209,26 @@ class ControleurListe {
             $rs->getBody()->write($vueDate->render());
             return $rs;
         }
+    }
+    /**
+     * méthode qui prepare la suppression d'un item de sa liste
+     */
+
+     function traiterItem($rq, $rs, $args) {
+        if (!isset($_SESSION['id_liste'])) {
+            $rs->getBody()->write("Vous n'avez pas acces a cette page");
+            return $rs;
+        }
+        $id_item = $args['idItem'];
+        $item = Item::find($id_item);
+        
+     }
+
+    function supprimerItem($rq, $rs, $args) {
+        if (!Authentication::isconnected()) {
+            $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
+            return $rs;
+        }
+        return $rs;
     }
 }
