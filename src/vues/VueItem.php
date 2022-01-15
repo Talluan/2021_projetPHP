@@ -29,6 +29,7 @@ class VueItem
         // var_dump($this->user);
         $id = $this->modele->getAttribute('id');
         $liste_id = $this->modele->getAttribute('liste_id');
+        $nom = $this->modele->getAttribute('nom');
         $descr = $this->modele->getAttribute('descr');
         $path = $this->rq->getUri()->getBasePath();
         $imgurl= $path.'/img/'.$this->modele->getAttribute('img');
@@ -39,6 +40,14 @@ class VueItem
                 <h1>Item numéro '. $id .'</h1>
                 <div class="row align-items-center">
                     <div class="col justify-content-md-center text-center align-middle">
+                    <div class="row">
+                        <div class="col-6">
+                            <h2>Nom de l\'item</h2>
+                        </div>
+                        <div class="col-6">'
+                            .$nom.
+                        '</div>
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <h2>Appartenance à une liste :</h2>
@@ -84,15 +93,26 @@ class VueItem
                     <div class="row">
                         <div class="col justify-content-md-center text-center align-middle">';
 
+                        // Si il y a quelqu'un qui le réserve
                         if (isset($this->user)) {
-                            if ($this->user->id == $_SESSION['user']['id']) {
-                                $html .= '
-                                    <a href="'. $path. '/item/'.$id.'/annuler">
-                                        <button type="button" class="btn btn-primary btn-lg">Annuler ma réservation</button>
-                                    </a>
+                            // Si la personne est connectée
+                            if (isset($_SESSION['user'])) {
+                                // On vérifie que la personne connectée est celle qui a réservé
+                                if ($this->user->id == $_SESSION['user']['id']) {
+                                    $html .= '
+                                        <a href="'. $path. '/item/'.$id.'/annuler">
+                                            <button type="button" class="btn btn-primary btn-lg">Annuler ma réservation</button>
+                                        </a>
+                                    </div>
+                                    ';
+                                }
+                                else {
+                                    $html .= '
                                 </div>
                                 ';
+                                }
                             }
+
 
                         }
                         else {
