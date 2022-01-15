@@ -3,6 +3,7 @@
 namespace wish\controleur;
 
 use wish\models\Item;
+use wish\models\Reservation;
 use wish\vues\VueItem;
 use wish\controleur\Authentication;
 use wish\vues\VueAjouterItem;
@@ -14,11 +15,15 @@ class ControleurItem
     *fonction qui renvoie l'item demande grace a son id dans l'URL
     *@return le code html corespondant a la vue
     */
-    public static function getItem($rq, $rs, $args)
-    {
+    public static function getItem($rq,$rs,$args) {
         $id_item = $args['id'];
         $item =  Item::find($id_item);
-        $vueitem = new VueItem($item, $rq);
+        $reserv = $item->reservation()->first();
+        $vueitem = new VueItem($item,$rq);
+        if (isset($reserv)) {
+            $user = $reserv->user()->first();
+            $vueitem = new VueItem($item,$rq, $user);
+        }
         $rs->getBody()->write($vueitem->render());
         return $rs;
     }
@@ -72,5 +77,26 @@ class ControleurItem
         $vueajouteritem = new VueAjouterItem($rq);
         $rs->getBody()->write($vueajouteritem->render());
         return $rs;
+    }
+
+
+    public function reserverItem($rq,$rs,$args) {
+        if (!Authentication::isconnected()) {
+            $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
+            return $rs;
+        }
+        $id_item = $args['id'];
+        $item =  Item::find($id_item);
+        $r = Reservation::where('item_id', $item)->first();
+        if (isset($r)) {
+            $rs->getBody()->write('<h1>Cet item est déjà réservé</h1>');
+            return $rs;
+        }
+        $reserv = new Reservation();
+        $reserv->item_id = $item->id;
+        $reserv->user_id = $_SESSION['user']['id'];
+        $reserv->save();
+        return ControleurItem::getItem($rq, $rs, $args);
+
     }
 }

@@ -12,4 +12,7 @@ class User extends \Illuminate\Database\Eloquent\Model
         return $this->belongsTo('wish\models\User', 'roleid');
     }
 
+    public function reservations() {
+        return $this->hasMany('wish\models\Reservation', 'user_id');
+    }
 }

@@ -34,6 +34,16 @@ CREATE TABLE `item` (
   `tarif` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE `reservation` (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) DEFAULT NULL,
+  item_id int(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (item_id) REFERENCES item(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 DROP TABLE IF EXISTS `liste`;
 CREATE TABLE `liste` (
   `no` int(11) NOT NULL AUTO_INCREMENT,

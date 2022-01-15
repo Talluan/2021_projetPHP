@@ -12,4 +12,8 @@ class Item extends \Illuminate\Database\Eloquent\Model
         return $this->belongsTo('wish\models\Liste', 'liste_id');
     }
 
+    public function reservation() {
+        return $this->hasOne(Reservation::class, 'item_id');
+    }
+
 }
