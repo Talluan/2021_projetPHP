@@ -48,6 +48,9 @@ END;
                 <li class="nav-item d-flex">
                     <a class="nav-link" href="$path/creerliste">Creer votre liste</a>
                 </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="$path/meslistes">Mes Listes</a>
+                </li>
             </ul>
 
             <span class="navbar-brand">$nom</span>

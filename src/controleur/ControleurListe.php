@@ -42,9 +42,30 @@ class ControleurListe {
                             if ($attributUser['id'] ==  $_SESSION['user']['id']){
                                 if($attributUser['roleid'] >= 3 ){ //si l'utilisateur est admin
                                     $etat = "Admin";
-                                    $l = Liste::find($num);
-                                    $vueListe = new VueListe($l,$rq,$etat);
-                                    $rs->getBody()->write($vueListe->render());
+                                    if($num<10000){ // si il s'agit d'un ID de liste
+                                        $l = Liste::find($num);
+                                        $vueListe = new VueListe($l,$rq,$etat);
+                                        $rs->getBody()->write($vueListe->render());
+                                    } else { //si il s'agit d'un Token de liste
+                                        $liste = Liste::all();
+                                        foreach ($liste as $list){
+                                            $attributListe = $list->getAttributes();
+                                            $l = Liste::find($attributListe['no']);
+                                            $temp = "/projetphp/liste/";
+                                            if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                                                $vueListe = new VueListe($l,$rq,$etat);
+                                                $rs->getBody()->write($vueListe->render());
+                                             }
+                                             elseif ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                                                $vueListe = new VueListe($l,$rq,$etat);
+                                                $rs->getBody()->write($vueListe->render());
+                                            }
+                                            elseif ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                                                $vueListe = new VueListe($l,$rq,$etat);
+                                                $rs->getBody()->write($vueListe->render());
+                                            }
+                                        }
+                                    }
                                 } else { //si l'utilisateur n'est pas admin
                                     if($num<10000){ //si il s'agit d'un ID de liste 
                                         $l = Liste::find($num);
@@ -79,6 +100,7 @@ class ControleurListe {
                     }
         } else { //si l'utilisateur n'est pas connecter
             if($num<10000){ //si il s'agit d'un ID de liste 
+                
                 $l = Liste::find($num);
                 $vueListe = new VueListe($l,$rq,"Interdit");
                 $rs->getBody()->write($vueListe->render());
