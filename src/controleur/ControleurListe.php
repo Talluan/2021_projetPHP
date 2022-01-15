@@ -99,7 +99,7 @@ class ControleurListe {
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
                                                                 } } 
-                                                                if($etat != "Proprio"){
+                                                                if(!isset($etat)){
                                                                     $liste = Liste::all();
                                         foreach ($liste as $list){
                                             $attributListe = $list->getAttributes();
