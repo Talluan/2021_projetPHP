@@ -82,11 +82,28 @@ class VueItem
                 <div class="row">
                 <div class="col-8">
                     <div class="row">
-                        <div class="col justify-content-md-center text-center align-middle">
-                            <a href="'. $path. '/item/'.$id.'/reserver">
-                            <button type="button" class="btn btn-primary btn-lg">Réserver cet item</button>
-                            </a>
-                        </div>
+                        <div class="col justify-content-md-center text-center align-middle">';
+
+                        if (isset($this->user)) {
+                            if ($this->user->id == $_SESSION['user']['id']) {
+                                $html .= '
+                                    <a href="'. $path. '/item/'.$id.'/annuler">
+                                        <button type="button" class="btn btn-primary btn-lg">Annuler ma réservation</button>
+                                    </a>
+                                </div>
+                                ';
+                            }
+
+                        }
+                        else {
+                            $html .= '
+                                <a href="'. $path. '/item/'.$id.'/reserver">
+                                    <button type="button" class="btn btn-primary btn-lg">Réserver cet item</button>
+                                </a>
+                            </div>';
+                        }
+
+                    $html .='
                         <div class="col justify-content-md-center text-center align-middle">
                             <button type="button" class="btn btn-primary btn-lg">Supprimer cet item</button>
                         </div>

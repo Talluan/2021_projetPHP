@@ -150,6 +150,14 @@ $app->get(
     }
 );
 
+$app->get(
+    '/item/{id}/annuler',
+    function ($rq, $rs, $args) {
+        $c = new ControleurItem;
+        return $c->annulerReservation($rq,$rs,$args);
+    }
+);
+
 $app->run();
 
 
