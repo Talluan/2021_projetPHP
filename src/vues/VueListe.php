@@ -255,6 +255,7 @@ HTML;
             $nom=$attributs['nom'];
             $img=$this->rq->getUri()->getBasePath()."/img/".$attributs['img'];
             $voir=$this->rq->getUri()->getBasePath()."/item/".$attributs['id'];
+            $supprimer=$this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/supprimeritem/".$attributs['id'];
             $html =<<<END
             <div class="col-sm-3">
 					<div class="membre-corps">
@@ -268,7 +269,7 @@ HTML;
 END;
             
                 $html .= '<div class="mambre-btn">
-                                <a href="'.$voir.'" class="btn btn-primary">Supprimer</a>
+                                <a href="'.$supprimer.'" class="btn btn-primary">Supprimer</a>
                             </div>';
             $html .= '</div></div>';
             $res.=$html;

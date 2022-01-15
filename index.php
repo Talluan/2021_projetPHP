@@ -54,6 +54,22 @@ $app->post(
 );
 
 $app->get(
+    '/liste/{idliste}/supprimeritem/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->supprimerItem($rq, $rs, $args);
+    }
+);
+
+$app->post(
+    '/liste/{idliste}/supprimeritem/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->supprimerItem($rq, $rs, $args);
+    }
+);
+
+$app->get(
     '/meslistes',
     function ($rq, $rs, $args) {
         $c = new ControleurListe;
