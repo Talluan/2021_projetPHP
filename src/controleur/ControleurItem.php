@@ -66,6 +66,7 @@ class ControleurItem
         $item->url = $url;
         $item->tarif = $prix;
         $item->save();
+        return $rs->withRedirect($rq->getUri()->getBasePath() . '/liste/' . $_SESSION['id_liste']);
     }
 
     public function ajouterItem($rq, $rs, $args)
@@ -96,33 +97,7 @@ class ControleurItem
         $reserv->item_id = $item->id;
         $reserv->user_id = $_SESSION['user']['id'];
         $reserv->save();
-        // On redirige l'utilisateur vers la page de l'item
-        $path = $rq->getUri()->getBasePath() . "/item/$id_item";
-        $rs = $rs->withRedirect($path);
-        return $rs;
+        return ControleurItem::getItem($rq, $rs, $args);
 
-    }
-
-    public function annulerReservation($rq, $rs, $args) {
-        if (!Authentication::isconnected()) {
-            $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
-            return $rs;
-        }
-        $id_item = $args['id'];
-        $item =  Item::find($id_item);
-        $r = $item->reservation;
-        if (!isset($r)) {
-            var_dump($r);
-            $rs->getBody()->write('<h1>Cet item n\'est pas encore réservé !</h1>');
-            return $rs;
-        }
-        else {
-            $r->delete();
-            $r->refresh();
-            // On redirige l'utilisateur vers la page de l'item
-            $path = $rq->getUri()->getBasePath() . "/item/$id_item";
-            $rs = $rs->withRedirect($path);
-            return $rs;
-        }
     }
 }

@@ -65,7 +65,7 @@ $app->post(
     '/liste/{idliste}/supprimeritem/{id}',
     function ($rq, $rs, $args) {
         $c = new ControleurListe;
-        return $c->supprimerItem($rq, $rs, $args);
+        return $c->traiterItem($rq, $rs, $args);
     }
 );
 

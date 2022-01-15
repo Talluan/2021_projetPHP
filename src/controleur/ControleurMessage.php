@@ -17,11 +17,11 @@ class ControleurMessage {
         if(!isset($_SESSION['user'])){
             return;
         }
-        $message = new Message();
-        $message->pseudo_id = $_SESSION['user']['id'];
-        $message->liste_id = $args['id'];
-        $message->message = $rq->getParsedBody()['message'];
-        if($message->message != ""){
+        if(isset($rq->getParsedBody()['message'])){
+            $message = new Message();
+            $message->pseudo_id = $_SESSION['user']['id'];
+            $message->liste_id = $args['id'];
+            $message->message = $rq->getParsedBody()['message'];
             $message->save();
         }
         $path = $rq->getUri()->getBasePath() . "/liste/" .$args['id'];
