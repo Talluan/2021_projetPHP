@@ -342,6 +342,13 @@ HTML;
         if(isset($_SESSION['user'])){
             $res .= $message;
         }
+        $res .= <<<HTML
+        <hr>
+        <div>
+        <a class="btn btn-primary" href="$path/modifierListe/$list_id">Modifier la liste</a>
+
+        </div>
+HTML;
         $res .= "</div>";
 
         return $res;
@@ -549,6 +556,12 @@ HTML;
         if(isset($_SESSION['user'])){
             $res .= $message;
         }
+        $res .= <<<HTML
+        <hr>
+        <div>
+            <a class="btn btn-primary" href="$path/modifierListe/$list_id">Modifier la liste</a>
+        </div>
+HTML;
         $res .= "</div>";
 
         return $res;
