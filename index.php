@@ -186,7 +186,15 @@ $app->get(
     '/modifierListe/{id}',
     function ($rq, $rs, $args) {
         $c = new ControleurListe();
-        return $c->modifierListe($rq, $rs,$args);
+        return $c->editerListe($rq, $rs,$args);
+    }
+);
+
+$app->post(
+    '/modifierListe/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->majListe($rq, $rs,$args);
     }
 );
 

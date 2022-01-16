@@ -377,11 +377,28 @@ class ControleurListe {
         return $rs;
     }
 
-    
-
-    public function modifierListe($rq,$rs,$args){
-        $vueCreer = new VueEditerListe(Liste::where('id','=',$args["id"]), $rq);
-        $rs->getBody()->write($vueCreer->render());
+    public function editerListe($rq, $rs, $args){
+        $vueEdit = new VueEditerListe(Liste::find($args['id']),$rq);
+        $rs->getBody()->write($vueEdit->render());
         return $rs;
+    }
+
+    public function majListe($rq,$rs,$args){
+
+        //recuperation des données
+        $parsed = $rq->getParsedBody();
+        $nom = filter_var($parsed['nom'], FILTER_SANITIZE_STRING);
+        $descr = filter_var($parsed['descr'], FILTER_SANITIZE_STRING);
+        $date = filter_var($parsed['date'], FILTER_SANITIZE_STRING);
+        
+        //maj liste
+        $liste = Liste::find($args['id']);
+        $liste->titre = $nom;
+        $liste->description = $descr;
+        $liste->expiration = $date;
+        $liste->save();
+
+        //redirection
+        return $rs->withRedirect( $rq->getUri()->getBasePath() . "/liste/" .$args['id']);
     }
 }
