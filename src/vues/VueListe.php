@@ -448,15 +448,15 @@ return $res;
             <div class="container">
             <div class="row">
             ';
-
-
+            
             if($timestamp1>$t2){
+
                 $res .=<<<END
-                <p> vue Surprise | ATTENTE </p>
+                <p> Vous ne pouvez pas voir ceci avant la date : $t </p>
 END;
             } else {
                 $res .=<<<END
-                <p> vue Surprise | AFFICHAGE CADEAUX </p>             
+                <p> AFFICHAGE CADEAUX </p>             
 END;
                 foreach ($this->model->items as $value) {
                     $attributs=$value->getAttributes();

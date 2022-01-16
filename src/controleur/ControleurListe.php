@@ -24,7 +24,7 @@ class ControleurListe {
         $num = $args['id'];
         $_SESSION['id_liste'] = $args['id'];
         $proprio = false;
-        $temp = "/projetphp/liste/";
+        $temp = $rq->getUri()->getBasePath()."/liste/";
         if (Authentication::isConnected()) { //si l'utilisateur est connecter
                     if(isset($_SESSION['user']['id'])){
                         $l = Liste::find($num);
@@ -188,7 +188,7 @@ class ControleurListe {
                 foreach ($liste as $list){
                     $attributListe = $list->getAttributes();
                     $l = Liste::find($attributListe['no']);
-                    $temp = "/projetphp/liste/";
+                    $temp = $rq->getUri()->getBasePath()."/liste/";
                     if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
                         $etat = "EditionPasConnecter";
                         $vueListe = new VueListe($l,$rq,$etat);
@@ -305,20 +305,10 @@ class ControleurListe {
             $l = Liste::find($num);
             $parsed = $rq->getParsedBody();
             $date = filter_var($parsed['date'], FILTER_SANITIZE_STRING);
-
-            $liste = Liste::all();
-            $temp = "/projetphp/liste/";
-                foreach ($liste as $list){
-                    $attributListe = $list->getAttributes();
-                    if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                        if($l->user_id == $_SESSION['user']['id']){
-                            $l->expiration = $date;
-                            $l->save();              
-                    }
-                                          
-                }
-
             
+            if($l->user_id == $_SESSION['user']['id']){
+                $l->expiration = $date;
+                $l->save();             
             }
             echo $date;
         }else{
