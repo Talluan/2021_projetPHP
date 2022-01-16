@@ -53,6 +53,8 @@ class VueListe
         private function vueEditionPasConnecter(){
             $res='
             <div class="container">
+            <h1>'.$this->model->titre.'</h1>
+            <p class"font-italic">'.$this->model->description.'</p>
             <div class="row">
             ';
 
@@ -152,6 +154,8 @@ return $res;
         private function vueEdition(){
             $res='
                     <div class="container">
+                    <h1>'.$this->model->titre.'</h1>
+                    <p class"font-italic">'.$this->model->description.'</p>
                     <div class="row">
                     ';
 
@@ -251,6 +255,8 @@ HTML;
         private function vueProprio(){
             $res='
                     <div class="container">
+                    <h1>'.$this->model->titre.'</h1>
+                    <p class"font-italic">'.$this->model->description.'</p>
                     <div class="row">
                     ';
 
@@ -358,6 +364,8 @@ HTML;
         private function vuePartage(){
             $res='
             <div class="container">
+            <h1>'.$this->model->titre.'</h1>
+            <p class"font-italic">'.$this->model->description.'</p>
             <div class="row">
             ';
 
@@ -453,6 +461,8 @@ return $res;
             $t2 = time();
             $res='
             <div class="container">
+            <h1>'.$this->model->titre.'</h1>
+            <p class"font-italic">'.$this->model->description.'</p>
             <div class="row">
             ';
             
@@ -497,6 +507,8 @@ END;
         private function vueAdmin(){
                     $res='
                     <div class="container">
+                    <h1>'.$this->model->titre.'</h1>
+                    <p class"font-italic">'.$this->model->description.'</p>
                     <div class="row">
                     ';
 
