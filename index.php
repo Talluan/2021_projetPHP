@@ -182,6 +182,14 @@ $app->get(
     }
 );
 
+$app->get(
+    '/modifierListe/{id}',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe();
+        return $c->modifierListe($rq, $rs,$args);
+    }
+);
+
 $app->run();
 
 

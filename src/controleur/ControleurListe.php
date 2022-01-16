@@ -4,11 +4,13 @@ namespace wish\controleur;
 
 use wish\models\Item;
 use wish\models\Liste;
+use wish\models\Reservation;
 use wish\vues\VueConnexion;
 use wish\vues\VueListe;
 use wish\vues\VueListes;
 use wish\vues\VueMesListes;
 use wish\vues\VueCreerListe;
+use wish\vues\VueEditerListe;
 use wish\vues\VueDateExpiration;
 use wish\models\User;
 use wish\vues\VueSupprimerItem;
@@ -337,6 +339,12 @@ class ControleurListe {
             $rs->getBody()->write("Vous n'avez pas acces a cette page");
             return $rs;
         }
+        //suppression reservation
+        $resa = Reservation::where('item_id',$args['id'])->first();    
+        if($resa != null){
+            $resa->delete();
+        }
+        //suppression item
         $item = Item::find($args['id']);
         $item->delete();
         echo "suppression";
@@ -366,9 +374,14 @@ class ControleurListe {
                 $rs->getBody()->write($vuePartage->render());
             } 
         }
-             
         return $rs;
-            
-        
+    }
+
+    
+
+    public function modifierListe($rq,$rs,$args){
+        $vueCreer = new VueEditerListe(Liste::where('id','=',$args["id"]), $rq);
+        $rs->getBody()->write($vueCreer->render());
+        return $rs;
     }
 }
