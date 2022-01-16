@@ -98,7 +98,7 @@ $liste_messages =
                         <h3>Mode : $this->etat</h3>
                     </div>
                     <div>
-                        <h3>Message</h3>
+                        <h3>Messages</h3>
                     </div>
                     <div class='row'>";
 //recherche des messages de la liste
@@ -199,7 +199,7 @@ END;
                                 <h3>Mode : $this->etat</h3>
                             </div>
                             <div>
-                                <h3>Message</h3>
+                                <h3>Messages</h3>
                             </div>
                             <div class='row'>";
         //recherche des messages de la liste
@@ -301,7 +301,7 @@ END;
                                 <h3>Mode : $this->etat</h3>
                             </div>
                             <div>
-                                <h3>Message</h3>
+                                <h3>Messages</h3>
                             </div>
                             <div class='row'>";
         //recherche des messages de la liste
@@ -402,7 +402,7 @@ $liste_messages =
                         <h3>Mode : $this->etat</h3>
                     </div>
                     <div>
-                        <h3>Message</h3>
+                        <h3>Messages</h3>
                     </div>
                     <div class='row'>";
 //recherche des messages de la liste
@@ -554,7 +554,7 @@ END;
                                 <h3>Mode : $this->etat</h3>
                             </div>
                             <div>
-                                <h3>Message</h3>
+                                <h3>Messages</h3>
                             </div>
                             <div class='row'>";
         //recherche des messages de la liste
