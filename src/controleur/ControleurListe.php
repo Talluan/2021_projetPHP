@@ -26,7 +26,7 @@ class ControleurListe {
         $num = $args['id'];
         $_SESSION['id_liste'] = $args['id'];
         $proprio = false;
-        $temp = "/projetphp/liste/";
+        $temp = $rq->getUri()->getBasePath()."/liste/";
         if (Authentication::isConnected()) { //si l'utilisateur est connecter
                     if(isset($_SESSION['user']['id'])){
                         $l = Liste::find($num);
@@ -37,6 +37,18 @@ class ControleurListe {
                             }  
                         }            
                     }
+                    $liste = Liste::all();
+                    $found = false;
+                    foreach ($liste as $list){
+                        $attributListe = $list->getAttributes();
+                        $l = Liste::find($attributListe['no']);
+                        if ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
+                            $vueListe = new VueListe($l,$rq,"Surprise");
+                            $rs->getBody()->write($vueListe->render());
+                            $found = true;
+                         }
+                        }
+                        if(!$found){
                     if ($proprio){ //si l'utilisateur est le propriétaire de la liste
                         $etat = "Proprio";
                         $vueListe = new VueListe($l,$rq,$etat);
@@ -77,7 +89,6 @@ class ControleurListe {
                                         $vueListe = new VueListe($l,$rq,"Interdit");
                                         $rs->getBody()->write($vueListe->render());
                                     } else { //si il s'agit d'un Token de liste
-
                                         $liste = Liste::all();
                                         foreach ($liste as $list){
                                             $attributListe = $list->getAttributes();
@@ -101,7 +112,8 @@ class ControleurListe {
                                                                         $vueListe = new VueListe($l,$rq,$etat);
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
-                                                                } } 
+                                                                }
+                                                             } 
                                                                 if(!isset($etat)){
                                                                     $liste = Liste::all();
                                         foreach ($liste as $list){
@@ -129,6 +141,7 @@ class ControleurListe {
                             }       
                         }
                     }
+                }
         } else { //si l'utilisateur n'est pas connecter
             if(isset($_COOKIE['WishListe2021AuChocolat'])){
                 $track_user_code = $_COOKIE[ 'WishListe2021AuChocolat' ];
@@ -171,20 +184,13 @@ class ControleurListe {
                                                 $rs->getBody()->write($vueListe->render());
                                             }
                                         }
-                                        elseif ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                                            if($attributListe['cookieUser'] == $track_user_code){
-                                                $etat = "Proprio";
-                                                //$l = Liste::find($attributListe['']);
-                                                $vueListe = new VueListe($l,$rq,$etat);
-                                                $rs->getBody()->write($vueListe->render());
-                                            }
-                                        } } 
+                                         } 
                                         if(!isset($etat)){
                                             $liste = Liste::all();
                 foreach ($liste as $list){
                     $attributListe = $list->getAttributes();
                     $l = Liste::find($attributListe['no']);
-                    $temp = "/projetphp/liste/";
+                    $temp = $rq->getUri()->getBasePath()."/liste/";
                     if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
                         $etat = "EditionPasConnecter";
                         $vueListe = new VueListe($l,$rq,$etat);
@@ -301,20 +307,10 @@ class ControleurListe {
             $l = Liste::find($num);
             $parsed = $rq->getParsedBody();
             $date = filter_var($parsed['date'], FILTER_SANITIZE_STRING);
-
-            $liste = Liste::all();
-            $temp = "/projetphp/liste/";
-                foreach ($liste as $list){
-                    $attributListe = $list->getAttributes();
-                    if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
-                        if($l->user_id == $_SESSION['user']['id']){
-                            $l->expiration = $date;
-                            $l->save();              
-                    }
-                                          
-                }
-
             
+            if($l->user_id == $_SESSION['user']['id']){
+                $l->expiration = $date;
+                $l->save();             
             }
             echo $date;
         }else{
@@ -353,10 +349,10 @@ class ControleurListe {
 
     function partageListe($rq, $rs, $args) {
         $num = $args['id'];
-        if (!Authentication::isconnected()) {
-            $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
-            return $rs;
-        }
+       // if (!Authentication::isconnected()) {
+        //    $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
+        //    return $rs;
+       // }
         $liste = Liste::all();
         $temp = "/projetphp/partageListe/";
         foreach ($liste as $list){

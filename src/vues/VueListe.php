@@ -448,7 +448,47 @@ return $res;
 
         //point de vue de celui qui recoit tous les cadeaux (il faut mettre un timer tant que la date n'est pas la bonne)
         private function vueSurprise(){
-            $res ="<p> vue Surprise </p>";
+            $t = $this->model->getAttributes()['expiration'];
+            $timestamp1 = strtotime($t);
+            $t2 = time();
+            $res='
+            <div class="container">
+            <div class="row">
+            ';
+            
+            if($timestamp1>$t2){
+
+                $res .=<<<END
+                <p> Vous ne pouvez pas voir ceci avant la date : $t </p>
+END;
+            } else {
+                $res .=<<<END
+                <p> AFFICHAGE CADEAUX </p>             
+END;
+                foreach ($this->model->items as $value) {
+                    $attributs=$value->getAttributes();
+                    $nom=$attributs['nom'];
+                    $img=$this->rq->getUri()->getBasePath()."/img/".$attributs['img'];
+                    $voir=$this->rq->getUri()->getBasePath()."/item/".$attributs['id'];
+                    $html =<<<END
+                    <div class="col-sm-3">
+                            <div class="membre-corps">
+                                <div>
+                                    $nom
+                                    <br><img src="$img" alt="" width="100" height="100"> 
+                                </div>
+                                <div class="mambre-btn">
+                                     <a href="$voir" class='btn btn-primary'>Voir</a>
+                                </div>
+END;
+                  
+                    $html .= '</div></div>';
+                    $res.=$html;
+        
+                }
+                
+            }
+            
             return $res;
         }
         
@@ -482,13 +522,6 @@ END;
                             </div>';
             
             $html .= '</div></div>';
-			// $res .= '<div class="col-sm-3">';
-			// $res .= '<div class="membre-corps">';
-			// $res .= $attributs['nom'];
-			// $res .= "<br><img src='".$this->rq->getUri()->getBasePath()."/img/".$attributs['img']."' alt='".$attributs['nom']."' heigth='100' width='100' > <br>".$attributs['tarif']."€ </div>";
-			// $res .= '<div class="btn btn-primary">';
-			// $res .= "<a class='btn btn-primary' href=".$this->rq->getUri()->getBasePath()."\/item/".$attributs['id'].">Voir</a>";
-            // $res .= '</div> </div> </div> </div> </div>';
             $res.=$html;
 
         }

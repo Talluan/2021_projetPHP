@@ -135,7 +135,7 @@ class VueSupprimerItem
         </form>
         </div>
 
-        HTML;
+HTML;
         return $html;
     }
 }
