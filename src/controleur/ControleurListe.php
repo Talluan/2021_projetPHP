@@ -389,13 +389,13 @@ class ControleurListe {
         
         //maj liste
         $liste = Liste::find($args['id']);
-        if($nom != null){
+        if(!isset($nom)){
             $liste->titre = $nom;
         }
-        if($descr != null){
+        if(!isset($descr)){
             $liste->description = $descr;
         }
-        if($date != null){
+        if(!isset($date)){
             $liste->expiration = $date;
         }
         $liste->save();
