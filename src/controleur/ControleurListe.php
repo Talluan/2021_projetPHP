@@ -389,11 +389,16 @@ class ControleurListe {
         
         //maj liste
         $liste = Liste::find($args['id']);
-        $liste->titre = $nom;
-        $liste->description = $descr;
-        $liste->expiration = $date;
+        if($nom != null){
+            $liste->titre = $nom;
+        }
+        if($descr != null){
+            $liste->description = $descr;
+        }
+        if($date != null){
+            $liste->expiration = $date;
+        }
         $liste->save();
-
         //redirection
         return $rs->withRedirect( $rq->getUri()->getBasePath() . "/liste/" .$args['id']);
     }
