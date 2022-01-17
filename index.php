@@ -175,6 +175,22 @@ $app->get(
 );
 
 $app->get(
+    '/liste/{id}/rendrePrivee',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->rendrePrivee($rq,$rs,$args);
+    }
+);
+
+$app->get(
+    '/liste/{id}/rendrePublique',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->rendrePublique($rq,$rs,$args);
+    }
+);
+
+$app->get(
     '/partageListe/{id}',
     function ($rq, $rs, $args) {
         $c = new ControleurListe();

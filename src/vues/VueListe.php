@@ -283,10 +283,21 @@ END;
         }
         $res .= "</div><br>";
         $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $rendrePrivee = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePrivee";
+        $rendrePublique = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePublique";
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
         $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
+        $list_id = $this->model->no;
+        $path = $this->rq->getUri()->getBasePath();
         $partage .= $_SESSION['id_liste'];
         $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info' href ='$partage'>Partager la liste</a>";
+        if($this->model->getAttributes()['public']){
+            $res .= <<<END
+            <a class='btn btn-success' href='$rendrePrivee'>Rendre Privée</a>"
+END;
+        } else {
+            $res .= "   <a class='btn btn-success' href='$rendrePublique'>Rendre Public</a>";
+        }
         $liste_messages = 
         "</div>
             <hr>
@@ -525,6 +536,8 @@ END;
             $nom=$attributs['nom'];
             $img=$this->rq->getUri()->getBasePath()."/img/".$attributs['img'];
             $voir=$this->rq->getUri()->getBasePath()."/item/".$attributs['id'];
+            $rendrePrivee = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePrivee";
+            $rendrePublique = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePublique";
             $html =<<<END
             <div class="col-sm-3">
 					<div class="membre-corps">
@@ -551,6 +564,13 @@ END;
         $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
         $partage .= $_SESSION['id_liste'];
         $res .= "<a class='btn btn-success' href='$ajouter'>Ajouter un item</a> <a class='btn btn-warning' href='$modifierDate' >Modifier date d'expiration</a> <a class='btn btn-info'  href='$partage'>Partager la liste</a>";
+        if($this->model->getAttributes()['public']){
+            $res .= <<<END
+            <a class='btn btn-success' href='$rendrePrivee'>Rendre Privée</a>"
+END;
+        } else {
+            $res .= "   <a class='btn btn-success' href='$rendrePublique'>Rendre Public</a>";
+        }
         $liste_messages = 
         "</div>
             <hr>

@@ -402,4 +402,21 @@ class ControleurListe {
         //redirection
         return $rs->withRedirect( $rq->getUri()->getBasePath() . "/liste/" .$args['id']);
     }
+
+    public function rendrePublique($rq,$rs,$args){
+        $num = $args['id'];
+        $l = Liste::find($num);
+        $l->public = 1;
+        $l->save();
+        return $rs;
+    }
+
+    public function rendrePrivee($rq,$rs,$args){
+        $num = $args['id'];
+        $l = Liste::find($num);
+        $l->public = 0;
+        $l->save();
+        return $rs;
+    }
+
 }
