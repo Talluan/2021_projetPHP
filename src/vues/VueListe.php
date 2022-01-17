@@ -2,6 +2,7 @@
 
 namespace wish\vues;
 use wish\models\User;
+use wish\models\Reservation;
 
 //use wish\models\User as User;
 
@@ -472,14 +473,21 @@ return $res;
                 <p> Vous ne pouvez pas voir ceci avant la date : $t </p>
 END;
             } else {
-                $res .=<<<END
-                <p> AFFICHAGE CADEAUX </p>             
-END;
+
                 foreach ($this->model->items as $value) {
                     $attributs=$value->getAttributes();
                     $nom=$attributs['nom'];
                     $img=$this->rq->getUri()->getBasePath()."/img/".$attributs['img'];
                     $voir=$this->rq->getUri()->getBasePath()."/item/".$attributs['id'];
+                    $reservation = Reservation::all();
+                    $msg = "";
+                    foreach ($reservation as $reserv){
+                        $attributsR = $reserv->getAttributes();
+                        if($attributsR['item_id'] == $attributs['id']){
+                            $msg = $attributsR['message'];
+                        }
+                    }
+                    
                     $html =<<<END
                     <div class="col-sm-3">
                             <div class="membre-corps">
@@ -490,6 +498,10 @@ END;
                                 <div class="mambre-btn">
                                      <a href="$voir" class='btn btn-primary'>Voir</a>
                                 </div>
+                                <div class="mambre-btn">
+                                     <p>$msg</p>
+                                </div>
+                                
 END;
                   
                     $html .= '</div></div>';
