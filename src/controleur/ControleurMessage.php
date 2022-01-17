@@ -21,7 +21,7 @@ class ControleurMessage {
             $message = new Message();
             $message->pseudo_id = $_SESSION['user']['id'];
             $message->liste_id = $args['id'];
-            $message->message = $rq->getParsedBody()['message'];
+            $message->message = filter_var($rq->getParsedBody()['message'], FILTER_SANITIZE_STRING);
             $message->save();
         }
         $path = $rq->getUri()->getBasePath() . "/liste/" .$args['id'];
