@@ -88,6 +88,7 @@ class VueItem
                 <div class="col-4">
                     <img src="'.$imgurl.'"style="object-fit:contain;width:300px;height:auto;">
                 </div>
+                <hr>
                 <div class="row">
                 <div class="col-8">
                     <div class="row">
@@ -117,9 +118,12 @@ class VueItem
                         }
                         else {
                             $html .= '
-                                <a href="'. $path. '/item/'.$id.'/reserver">
-                                    <button type="button" class="btn btn-primary btn-lg">Réserver cet item</button>
-                                </a>
+                                <form action="'. $path. '/item/'.$id.'/reserver" method="POST">
+                                            <label for="nomListe">Publier un message</label>
+                                            <textarea class="form-control" name="message" placeholder=\'Petit message destiné à la personne\' id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <button type="submit" class="btn btn-primary btn-lg">Réserver cet item</button>
+                                </form>
+
                             </div>';
                         }
 

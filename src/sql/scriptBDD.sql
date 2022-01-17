@@ -31,7 +31,7 @@ CREATE TABLE `item` (
   `descr` text,
   `img` text,
   `url` text,
-  `tarif` decimal(5,2) DEFAULT NULL
+  `tarif` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `reservation`;
@@ -39,6 +39,7 @@ CREATE TABLE `reservation` (
   id int(11) NOT NULL AUTO_INCREMENT,
   user_id int(11) DEFAULT NULL,
   item_id int(11) DEFAULT NULL,
+  message text DEFAULT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (item_id) REFERENCES item(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
