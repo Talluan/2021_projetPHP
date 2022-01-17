@@ -151,7 +151,7 @@ $res .= "</div>";
 return $res;
         }     
 
-        //point de vue d'un utilisateur connecté qui peut intérageur avec la liste !
+        //point de vue d'un utilisateur connecté qui peut intéragir avec la liste !
         private function vueEdition(){
             $res='
                     <div class="container">
