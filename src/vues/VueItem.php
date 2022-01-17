@@ -1,6 +1,8 @@
 <?php
 
 namespace wish\vues;
+
+use wish\controleur\Authentication;
 use wish\vues\Vue;
 
 class VueItem
@@ -127,10 +129,13 @@ class VueItem
                             </div>';
                         }
 
-                    $html .='
+                        if(Authentication::isConnected()){
+                            $html .='
                         <div class="col justify-content-md-center text-center align-middle">
                             <button type="button" class="btn btn-primary btn-lg">Supprimer cet item</button>
-                        </div>
+                        </div>';
+                        }
+                    $html.='
                     </div>
                 </div>
             </div>
