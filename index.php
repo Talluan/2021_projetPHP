@@ -158,7 +158,7 @@ $app->get(
     }
 );
 
-$app->get(
+$app->post(
     '/item/{id}/reserver',
     function ($rq, $rs, $args) {
         $c = new ControleurItem;

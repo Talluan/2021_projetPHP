@@ -94,6 +94,9 @@ class ControleurItem
             return $rs;
         }
         $reserv = new Reservation();
+        if (isset($rq->getParsedBody()['message'])) {
+            $reserv->message = filter_var($rq->getParsedBody()['message'], FILTER_SANITIZE_STRING);
+        }
         $reserv->item_id = $item->id;
         $reserv->user_id = $_SESSION['user']['id'];
         $reserv->save();
