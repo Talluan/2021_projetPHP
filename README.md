@@ -46,6 +46,8 @@ présentation de la liste à date d'échéance, rendre une liste publique
 
 
 ### Aide : 
+Il faut exécuter "scriptBDD.sql" pour que la base de donnée soit la bonne 
+
 compte admin : ADMIN - motdepasseadmin
 compte créateur : CRÉATEUR - motdepassecréateur
 compte participant1 : PARTICIPANT1 - motdepasseparticipant1
