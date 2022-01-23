@@ -422,6 +422,9 @@ class ControleurListe {
         $l = Liste::find($num);
         $l->public = 1;
         $l->save();
+
+        $path = $rq->getUri()->getBasePath() . "/liste/" .$args['id'];
+        $rs = $rs->withRedirect($path);
         return $rs;
     }
 
@@ -430,6 +433,10 @@ class ControleurListe {
         $l = Liste::find($num);
         $l->public = 0;
         $l->save();
+
+        $path = $rq->getUri()->getBasePath() . "/liste/" .$args['id'];
+        $rs = $rs->withRedirect($path);
+
         return $rs;
     }
 
