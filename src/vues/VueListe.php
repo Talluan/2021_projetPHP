@@ -96,7 +96,7 @@ $liste_messages =
             <div class='col-sm-3'>
                 <div class='membre-corps'>
                 <div>
-                        <h3>Mode : $this->etat (Connectez-vous pour avoir plus de droit) </h3>
+                        <h3>Connectez-vous pour avoir plus de droit ! </h3>
                     </div>
                     <div>
                         <h3>Messages</h3>
@@ -196,9 +196,7 @@ END;
                 <div class='row'>
                     <div class='col-sm-3'>
                         <div class='membre-corps'>
-                        <div>
-                                <h3>Mode : $this->etat</h3>
-                            </div>
+                        
                             <div>
                                 <h3>Messages</h3>
                             </div>
@@ -310,9 +308,7 @@ END;
                 <div class='row'>
                     <div class='col-sm-3'>
                         <div class='membre-corps'>
-                        <div>
-                                <h3>Mode : $this->etat</h3>
-                            </div>
+                        
                             <div>
                                 <h3>Messages</h3>
                             </div>
@@ -429,9 +425,7 @@ END;
                 <div class='row'>
                     <div class='col-sm-3'>
                         <div class='membre-corps'>
-                        <div>
-                                <h3>Mode : $this->etat</h3>
-                            </div>
+                        
                             <div>
                                 <h3>Messages</h3>
                             </div>
@@ -530,9 +524,7 @@ $liste_messages =
         <div class='row'>
             <div class='col-sm-3'>
                 <div class='membre-corps'>
-                <div>
-                        <h3>Mode : $this->etat</h3>
-                    </div>
+                
                     <div>
                         <h3>Messages</h3>
                     </div>
@@ -704,9 +696,7 @@ END;
                 <div class='row'>
                     <div class='col-sm-3'>
                         <div class='membre-corps'>
-                        <div>
-                                <h3>Mode : $this->etat</h3>
-                            </div>
+                        
                             <div>
                                 <h3>Messages</h3>
                             </div>
