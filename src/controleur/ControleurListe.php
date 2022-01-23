@@ -164,6 +164,10 @@ class ControleurListe {
         } else { //si l'utilisateur n'est pas connecter
             if(isset($_COOKIE['WishListe2021AuChocolat'])){
                 $track_user_code = $_COOKIE[ 'WishListe2021AuChocolat' ];
+            } else {
+                $nomCookie = 'WishListe2021AuChocolat';
+                $valCookie = random_int(intval(-99999999999),-2);
+                setcookie($nomCookie, $valCookie, time() + 60*60*24*30);
             }
                 $l = Liste::find($num);
                 if($l != null){ 
