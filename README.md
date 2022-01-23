@@ -13,8 +13,10 @@ KREROWICZ Robin
 
 • niveau 1 – note maxi 13 : création de liste, ajout d'items, partage par url, réservation de
 cadeaux par les participants
+
 • niveau 2 – note maxi 16 : niveau 1 + modification/suppression de liste, ajout de message,
 présentation de la liste à date d'échéance, rendre une liste publique
+
 • niveau 3 – note maxi 20 : niveau 2 + autres extensions
 
 ### Tableau de bord :
