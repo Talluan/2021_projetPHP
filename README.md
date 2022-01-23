@@ -44,6 +44,7 @@ présentation de la liste à date d'échéance, rendre une liste publique
  - Ajouter/créer Item
  - Upload d'image vers le serveur 
  - Date d'expiration
+ - Partage de liste ( correction )
  - WebEtu
 
 
