@@ -33,5 +33,9 @@ présentation de la liste à date d'échéance, rendre une liste publique
   - Edition des caractèristiques d'une liste par son propriétaire (titre, description et dates)
 
 #### Mathieu Maion :
+ - Partage des Listes
+ - Les Cookies 
+ - Boutons pour rendre une liste privée/publique ainsi qu'enregistrer une liste (la lié à un compte si la liste a été créer sans être connecter)
+ - les différentes vues d'une liste avec les droits accordés
 
 #### Antonin Rousseau :
