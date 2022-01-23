@@ -26,6 +26,7 @@ class ControleurListe {
         $num = $args['id'];
         $_SESSION['id_liste'] = $args['id'];
         $proprio = false;
+        $avecCookie = false;
         $temp = $rq->getUri()->getBasePath()."/liste/";
         if (Authentication::isConnected()) { //si l'utilisateur est connecter
                     if(isset($_SESSION['user']['id'])){
@@ -36,6 +37,15 @@ class ControleurListe {
                                 $proprio = true;
                             }  
                         }            
+                    }
+                    if(isset($_COOKIE['WishListe2021AuChocolat'])){
+                        $l = Liste::find($num);
+                        if($l != null){ 
+                            $attributListe = $l->getAttributes();
+                            if($_COOKIE['WishListe2021AuChocolat'] == $attributListe['cookieUser']){
+                                $avecCookie = true;
+                            }  
+                        } 
                     }
                     $liste = Liste::all();
                     $found = false;
@@ -50,11 +60,18 @@ class ControleurListe {
                         }
                         if(!$found){
                             $l = Liste::find($num);
+                            
                     if ($proprio){ //si l'utilisateur est le propriétaire de la liste
                         $etat = "Proprio";
                         $vueListe = new VueListe($l,$rq,$etat);
                         $rs->getBody()->write($vueListe->render());
                     } else { //si l'utilisateur n'est pas le propriétaire de la liste
+
+                        if($avecCookie){
+                            $vueListe = new VueListe($l,$rq,"ProprioAvecCookie");
+                        $rs->getBody()->write($vueListe->render());
+                        $found = true;
+                        } else {
                         $users = User::all();
                         foreach ($users as $user){
                             $attributUser = $user->getAttributes();
@@ -142,6 +159,8 @@ class ControleurListe {
                             }       
                         }
                     }
+                    }
+                
                 }
         } else { //si l'utilisateur n'est pas connecter
             if(isset($_COOKIE['WishListe2021AuChocolat'])){
@@ -155,7 +174,7 @@ class ControleurListe {
                     }  
                 }            
             if ($proprio){ //si l'utilisateur est le propriétaire de la liste
-                $etat = "Proprio";
+                $etat = "ProprioPasCo";
                 $vueListe = new VueListe($l,$rq,$etat);
                 $rs->getBody()->write($vueListe->render());
             } 
@@ -420,6 +439,14 @@ class ControleurListe {
         $num = $args['id'];
         $l = Liste::find($num);
         $l->public = 0;
+        $l->save();
+        return $rs;
+    }
+
+    public function enregistrer($rq,$rs,$args){
+        $num = $args['id'];
+        $l = Liste::find($num);
+        $l->user_id = $_SESSION['user']['id'];
         $l->save();
         return $rs;
     }

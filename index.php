@@ -191,6 +191,14 @@ $app->get(
 );
 
 $app->get(
+    '/liste/{id}/enregistrer',
+    function ($rq, $rs, $args) {
+        $c = new ControleurListe;
+        return $c->enregistrer($rq,$rs,$args);
+    }
+);
+
+$app->get(
     '/partageListe/{id}',
     function ($rq, $rs, $args) {
         $c = new ControleurListe();

@@ -55,8 +55,8 @@ END;
 END;
                 }
             }
-        } else {
-            if(isset( $attributListe['cookieUser']) && $attributListe['cookieUser'] == $this->id){
+        } //else {
+            if(isset( $attributListe['cookieUser']) && $attributListe['cookieUser'] == $_COOKIE['WishListe2021AuChocolat']){
                 $titre = $attributListe['titre'];
                 $msg = $attributListe['description'] . " | " . $attributListe['expiration'];
                 $res .= <<<END
@@ -81,7 +81,7 @@ END;
                     }
                 }
             }
-        }
+      //  }
         }
         $res .= "</li></ul>";
         return $res;
