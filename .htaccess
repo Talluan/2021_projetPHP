@@ -1,3 +1,12 @@
 RewriteEngine ON
+
+# Pour le webetu
+# RewriteBase /www/roussea97u/wishlist
+
+# Pour ne pas se faire voler les identifiants de la bdd
+RewriteRule ^conf(/.*|)$ - [NC,F]
+RewriteRule ^src(/.*|)$ - [NC,F]
+
 RewriteCond %{REQUEST_FILENAME} !-f
+
 RewriteRule ^ index.php [QSA,L]
