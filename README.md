@@ -28,6 +28,9 @@ présentation de la liste à date d'échéance, rendre une liste publique
   - Système d'authentification (création d'un compte, connexion/déconnexion...)
 
 #### Robin Krerowicz :
+  - Vue et ajout des messages sur une liste par un utilisateur connecté
+  - Suppression d'un item d'une liste par le propriétaire de la liste uniquement
+  - Edition des caractèristiques d'une liste par son propriétaire (titre, description et dates)
 
 #### Mathieu Maion :
 
