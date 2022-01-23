@@ -447,6 +447,7 @@ class ControleurListe {
         $num = $args['id'];
         $l = Liste::find($num);
         $l->user_id = $_SESSION['user']['id'];
+        $l->cookieUser = 0;
         $l->save();
         return $rs;
     }
