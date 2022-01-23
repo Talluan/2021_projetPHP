@@ -80,8 +80,9 @@ INSERT INTO `role` (`label`, `auth_level`) VALUES ('admin', 101);
 
 
 INSERT INTO `user` (`pseudo`, `passwd`, `roleid`) VALUES ('ADMIN', '$2y$10$0U1VIQu93m0ywthonDzsr.DygthikzwSReh0Tu.BsMZ9UqvEgmcI2', 3);
-INSERT INTO `user` (`pseudo`, `passwd`, `roleid`) VALUES ('TesteurUser', 'MotDePasse', 2);
-INSERT INTO `user` (`pseudo`, `passwd`, `roleid`) VALUES ('TesteurVisit', 'MotDePasse', 1);
+INSERT INTO `user` (`pseudo`, `passwd`, `roleid`) VALUES ('CRÉATEUR', '$2y$10$eMJ9PSW/CEkcJwFz417pgOGdxgqjgRIsP.XX5D3QtqsYMPAmPKvym', 2);
+INSERT INTO `user` (`pseudo`, `passwd`, `roleid`) VALUES ('PARTICIPANT1', '$2y$10$/6D.xnMiEt4lZ.RlfL8Fau9L6cZ3/.6AMOfbj/LDxxg8L7Z714e2K', 2);
+INSERT INTO `user` (`pseudo`, `passwd`, `roleid`) VALUES ('PARTICIPANT2', '$2y$10$lOcme4kE/RJVfJyNamfyKOslpLb8vH1CDPunyQxplp63uPFo1XfEq', 2);
 
 
 INSERT INTO `item` (`id`, `liste_id`, `nom`, `descr`, `img`, `url`, `tarif`) VALUES
@@ -109,6 +110,10 @@ INSERT INTO `item` (`id`, `liste_id`, `nom`, `descr`, `img`, `url`, `tarif`) VAL
 INSERT INTO `liste` (`no`, `user_id`, `titre`, `description`, `expiration`,`public`, `tokenEdition`, `tokenPartage`, `tokenSurprise`) VALUES
 (1,	2,	'Pour fêter le bac !',	'Pour un week-end à Nancy qui nous fera oublier les épreuves. ',	'2018-06-27',TRUE, 10001, 10004, 10007),
 (2,	2,	'Liste de mariage d\'Alice et Bob',	'Nous souhaitons passer un week-end royal à Nancy pour notre lune de miel :)',	'2018-06-30',TRUE, 10002, 10005, 10008),
-(3,	3,	'C\'est l\'anniversaire de Charlie',	'Pour lui préparer une fête dont il se souviendra :)',	'2017-12-12',TRUE,	10003, 10006, 10009);
+(3,	2,	'C\'est l\'anniversaire de Charlie',	'Pour lui préparer une fête dont il se souviendra :)',	'2017-12-12',FALSE,	10003, 10006, 10009);
 
+INSERT INTO `reservation` (`id`,`user_id`,`item_id`,`message`) VALUES
+(1,4,1,'C\'est pour moi'),
+(2,4,2,'Bon cadeaux'),
+(3,3,3,'tu me le remboursera plus tard');
 

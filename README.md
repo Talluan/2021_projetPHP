@@ -47,3 +47,6 @@ présentation de la liste à date d'échéance, rendre une liste publique
 
 ### Aide : 
 compte admin : ADMIN - motdepasseadmin
+compte créateur : CRÉATEUR - motdepassecréateur
+compte participant1 : PARTICIPANT1 - motdepasseparticipant1
+compte participant2 : PARTICIPANT2 - motdepasseparticipant2
