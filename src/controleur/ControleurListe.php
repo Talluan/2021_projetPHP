@@ -66,7 +66,6 @@ class ControleurListe {
                         $vueListe = new VueListe($l,$rq,$etat);
                         $rs->getBody()->write($vueListe->render());
                     } else { //si l'utilisateur n'est pas le propriétaire de la liste
-
                         if($avecCookie){
                             $vueListe = new VueListe($l,$rq,"ProprioAvecCookie");
                         $rs->getBody()->write($vueListe->render());
@@ -113,21 +112,21 @@ class ControleurListe {
                                                                 if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                                                     if($attributListe['user_id'] == $attributUser['id']){
                                                                         $etat = "Proprio";
-                                                                        $vueListe = new VueListe($l,$rq,$etat);
+                                                                        $vueListe = new VueListe($list,$rq,$etat);
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
                                                                  }
                                                                  elseif ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                                                     if($attributListe['user_id'] == $attributUser['id']){
                                                                         $etat = "Proprio";
-                                                                        $vueListe = new VueListe($l,$rq,$etat);
+                                                                        $vueListe = new VueListe($list,$rq,$etat);
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
                                                                 }
                                                                 elseif ($temp.$attributListe['tokenSurprise'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                                                     if($attributListe['user_id'] == $attributUser['id']){
                                                                         $etat = "Proprio";
-                                                                        $vueListe = new VueListe($l,$rq,$etat);
+                                                                        $vueListe = new VueListe($list,$rq,$etat);
                                                                         $rs->getBody()->write($vueListe->render());
                                                                     }
                                                                 }
@@ -191,7 +190,6 @@ class ControleurListe {
                                         if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                             if($attributListe['cookieUser'] == $track_user_code){
                                                 $etat = "Proprio";
-                                                //$l = Liste::find($attributListe['']);
                                                 $vueListe = new VueListe($l,$rq,$etat);
                                                 $rs->getBody()->write($vueListe->render());
                                             }
@@ -199,7 +197,6 @@ class ControleurListe {
                                          elseif ($temp.$attributListe['tokenPartage'] ==  $_SERVER[ 'REQUEST_URI' ]){
                                             if($attributListe['cookieUser'] == $track_user_code){
                                                 $etat = "Proprio";
-                                                //$l = Liste::find($attributListe['']);
                                                 $vueListe = new VueListe($l,$rq,$etat);
                                                 $rs->getBody()->write($vueListe->render());
                                             }
