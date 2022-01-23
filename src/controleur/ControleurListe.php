@@ -373,12 +373,13 @@ class ControleurListe {
         return $rs->withRedirect( $rq->getUri()->getBasePath() . "/liste/" .$args['idliste']);
     }
 
+    /**
+     * Partage de la liste
+     * 
+     * Désolé Mathieu j'ai tout refait en propre
+     */
     function partageListe($rq, $rs, $args) {
         $num = $args['id'];
-       // if (!Authentication::isconnected()) {
-        //    $rs->getBody()->write('<h1>Vous devez être connecté pour accéder à cette page</h1>');
-        //    return $rs;
-       // }
         $liste = Liste::where("no",$num)->orWhere('tokenEdition', $num)->orWhere('tokenPartage', $num)->orWhere('tokenSurprise', $num)->first();
         $attributListe = $liste->getAttributes();
         $vuePartage = new VuePartage($rq,$rs,$args,$num,"Admin");
