@@ -26,10 +26,8 @@ class VuePartage
     public function partage()
     {
         $res ="";
-        $return = "/projetphp/liste/".$this->num;
-        $te = $this->rq->getUri();
-        $tr = $_SERVER['REQUEST_URI'];
-        $newphrase = str_replace($tr, "/projetphp/liste/", $te);
+        $return = $this->rq->getUri()->getBaseUrl()."/liste/".$this->num;
+        $newphrase = $this->rq->getUri()->getBaseUrl()."/liste/";
 
     $temp = $this->rq->getUri();
    // $newphrase = str_replace($healthy, $yummy, $temp);
