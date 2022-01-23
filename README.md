@@ -35,7 +35,13 @@ présentation de la liste à date d'échéance, rendre une liste publique
 #### Mathieu Maion :
  - Partage des Listes
  - Les Cookies 
- - Boutons pour rendre une liste privée/publique ainsi qu'enregistrer une liste (la lié à un compte si la liste a été créer sans être connecter)
+ - Boutons pour rendre une liste privée/publique ainsi qu'enregistrer une liste (la lier à un compte si la liste a été créer sans être connecté)
  - les différentes vues d'une liste avec les droits accordés
 
 #### Antonin Rousseau :
+ - Critiquer le beau code de Mathieu :) 
+
+
+
+### Aide : 
+compte admin : ADMIN - motdepasseadmin
