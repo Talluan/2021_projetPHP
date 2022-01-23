@@ -184,7 +184,7 @@ END;
             $res.=$html;
         }
         $res .= "</div><br>";
-        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem/".$this->model->tokenEdition;
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
         $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
         $partage .= $_SESSION['id_liste'];
@@ -284,7 +284,7 @@ END;
             $res.=$html;
         }
         $res .= "</div><br>";
-        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem/".$this->model->tokenEdition;
         $rendrePrivee = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePrivee";
         $rendrePublique = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePublique";
         $enregistrer = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/enregistrer";
@@ -402,7 +402,7 @@ END;
             $res.=$html;
         }
         $res .= "</div><br>";
-        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem/".$this->model->tokenEdition;
         $rendrePrivee = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePrivee";
         $rendrePublique = $this->rq->getUri()->getBasePath()."/liste/".$this->model->getAttributes()['no']."/rendrePublique";
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
@@ -675,7 +675,7 @@ END;
 
         }
         $res .= "</div><br>";
-        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $ajouter = $this->rq->getUri()->getBasePath()."/ajouteritem/".$this->model->tokenEdition;
         $modifierDate = $this->rq->getUri()->getBasePath()."/ajouterDateExpiration";
         $partage = $this->rq->getUri()->getBasePath()."/partageListe/";
         $partage .= $_SESSION['id_liste'];

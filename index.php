@@ -129,14 +129,14 @@ $app->post(
     }
 );
 $app->post(
-    '/ajouteritem',
+    '/ajouteritem/{token}',
     function ($rq, $rs, $args) {
         $c = new ControleurItem();
         return $c->traiterItem($rq, $rs,$args);
     }
 );
 $app->get(
-    '/ajouteritem',
+    '/ajouteritem/{token}',
     function ($rq, $rs, $args) {
         $c = new ControleurItem();
         return $c->ajouterItem($rq, $rs,$args);

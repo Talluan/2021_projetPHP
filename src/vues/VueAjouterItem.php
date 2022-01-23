@@ -19,7 +19,8 @@ class VueAjouterItem
 
     public function ajouterItem()
     {
-        $uri = $this->rq->getUri()->getBasePath()."/ajouteritem";
+        $tokenedit=$this->rq->getAttribute('token');
+        $uri = $this->rq->getUri()->getBasePath()."/ajouteritem/$tokenedit";
         $res = <<<END
 
         <div class="container">

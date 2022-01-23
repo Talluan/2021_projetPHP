@@ -7,6 +7,7 @@ use wish\models\Reservation;
 use wish\vues\VueItem;
 use wish\controleur\Authentication;
 use wish\vues\VueAjouterItem;
+use wish\models\Liste;
 
 class ControleurItem
 {
@@ -34,13 +35,31 @@ class ControleurItem
             $rs->getBody()->write("Vous n'avez pas acces a cette page");
             return $rs;
         }
+        $l=null;
+
+        $idListe=$_SESSION['id_liste'];
+
+        if($idListe<10000){ // pas le choix avec le systeme de mathmaille
+            $l=Liste::find($idListe);
+            //si on y accede par un idList on doit verifier qu'il est admin
+            if($_SESSION['user']['auth_lvl']!=3){
+                //sinon on regarde si c'est sa propre liste
+                if($l->user_id != $_SESSION['user']['id']){
+                    //si aucune des conditions n'est rempli on ne fait rien
+                    $rs->getBody()->write("ERREUR PERMISSION");
+                    return $rs;
+                }
+            }
+        }else{
+            $l=Liste::where("tokenEdition",$args['token'])->first();
+        }
         $parsed = $rq->getParsedBody();
         $nom = filter_var($parsed['nom'], FILTER_SANITIZE_STRING);
         $descr = filter_var($parsed['description'], FILTER_SANITIZE_STRING);
         $prix = filter_var($parsed['prix'], FILTER_SANITIZE_STRING);
         $url = filter_var($parsed['url'], FILTER_SANITIZE_STRING);
         $item = new Item();
-        $item->liste_id = $_SESSION['id_liste'];
+        $item->liste_id = $l->no;
         $item->nom = $nom;
         $item->descr = $descr;
 
@@ -61,7 +80,6 @@ class ControleurItem
             $item->img = "gift.jpg";
         }
 
-        // handle single input with single file upload
 
         $item->url = $url;
         $item->tarif = $prix;

@@ -47,7 +47,7 @@ class Authentication {
         $data = [
             'id' => $u->id,
             'pseudo' => $u->pseudo,
-            'auth_lvl' => $u->role->auth_level
+            'auth_lvl' => $u->roleid
         ];
         $_SESSION['user'] = $data;
     }
