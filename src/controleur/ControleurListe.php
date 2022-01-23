@@ -49,6 +49,7 @@ class ControleurListe {
                          }
                         }
                         if(!$found){
+                            $l = Liste::find($num);
                     if ($proprio){ //si l'utilisateur est le propriétaire de la liste
                         $etat = "Proprio";
                         $vueListe = new VueListe($l,$rq,$etat);
@@ -277,10 +278,14 @@ class ControleurListe {
         } else {
             {
                 //création d'un cookie durant 1mois (qui permet de stocker les lists mêmes si l'utilisateur n'est pas connecte)
+                if(!isset($_COOKIE['WishListe2021AuChocolat'])){
                 $nomCookie = 'WishListe2021AuChocolat';
                 $valCookie = random_int(intval(-99999999999),-2);
                 setcookie($nomCookie, $valCookie, time() + 60*60*24*30);
                 $liste->cookieUser = $valCookie;
+                } else {
+                    $liste->cookieUser = $_COOKIE['WishListe2021AuChocolat'];
+                }
             }
         }
         $liste->save();
