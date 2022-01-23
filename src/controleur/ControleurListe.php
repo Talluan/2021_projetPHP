@@ -380,7 +380,7 @@ class ControleurListe {
         //    return $rs;
        // }
         $liste = Liste::all();
-        $temp = "/projetphp/partageListe/";
+        $temp = $rq->getUri()->getBasePath()."/partageListe/";
         foreach ($liste as $list){
             $attributListe = $list->getAttributes();
              if ($temp.$attributListe['tokenEdition'] ==  $_SERVER[ 'REQUEST_URI' ]){
