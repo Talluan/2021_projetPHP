@@ -168,6 +168,7 @@ class ControleurListe {
                 $nomCookie = 'WishListe2021AuChocolat';
                 $valCookie = random_int(intval(-99999999999),-2);
                 setcookie($nomCookie, $valCookie, time() + 60*60*24*30);
+                $track_user_code = $_COOKIE[ 'WishListe2021AuChocolat' ];
             }
                 $l = Liste::find($num);
                 if($l != null){ 
