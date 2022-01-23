@@ -39,8 +39,10 @@ présentation de la liste à date d'échéance, rendre une liste publique
  - les différentes vues d'une liste avec les droits accordés
 
 #### Antonin Rousseau :
- - Critiquer le beau code de Mathieu :) 
-
+ - Ajouter/créer Item
+ - Upload d'image vers le serveur 
+ - Date d'expiration
+ - WebEtu
 
 
 ### Aide : 
