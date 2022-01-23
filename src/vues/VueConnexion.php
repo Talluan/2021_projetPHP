@@ -32,12 +32,12 @@ class VueConnexion
 
     public function creerVueConnexion()
     {
-        $host = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'];
+        $host = $this->rq->getUri()->getBasePath();
         $res = <<<END
     <div class="container">
         <div class="row">
             <div class="col-6 p-3">
-                <form action="$host/projetphp/connexion/connex" method="POST">
+                <form action="$host/connexion/connex" method="POST">
                     <h3> Se connecter </h3>
                     <div class="row">
                         <div class="col">
@@ -58,7 +58,7 @@ class VueConnexion
                 </form>
             </div>
             <div class="col-6 p-3">
-                <form action="$host/projetphp/connexion/crea" method="POST">
+                <form action="$host/connexion/crea" method="POST">
                     <h3> Créer un compte </h3>
                     <div class="row">
                         <div class="col">
